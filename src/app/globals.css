@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: #232324;
+  --color-foreground: #f5f5f5;
+  --color-primary: #232324;
+  --color-gold: #ffc700;
+  --color-gold-hover: #e6b400;
+  --color-card: #2d2d2e;
+  --color-card-hover: #353536;
+  --color-muted: #9a9a9a;
+  --color-border: #3a3a3b;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #232324;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a3a3b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4b;
+}
+
+/* Selection */
+::selection {
+  background: #ffc700;
+  color: #232324;
+}
+
+/* Navbar logo animation */
+@keyframes dl-nav-f {
+  0%, 12.5%, 100% { transform: rotate(45deg); }
+  20.8% { transform: rotate(135deg); }
+  29.2% { transform: rotate(45deg); }
+}
+@keyframes dl-nav-m {
+  0%, 12.5%, 100% { transform: rotate(45deg); }
+  21.5% { transform: rotate(130deg); }
+  30% { transform: rotate(45deg); }
+}
+@keyframes dl-nav-b {
+  0%, 12.5%, 100% { transform: rotate(45deg); }
+  22.2% { transform: rotate(125deg); }
+  30.8% { transform: rotate(45deg); }
+}
+
+.dl-nav-front {
+  transform: rotate(45deg);
+  animation: dl-nav-f 4s ease-in-out infinite;
+}
+.dl-nav-mid {
+  transform: rotate(45deg);
+  animation: dl-nav-m 4s ease-in-out infinite 0.06s;
+}
+.dl-nav-back {
+  transform: rotate(45deg);
+  animation: dl-nav-b 4s ease-in-out infinite 0.12s;
 }
