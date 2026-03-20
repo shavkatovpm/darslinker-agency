@@ -96,7 +96,7 @@ function NotificationStack({ started }: { started: boolean }) {
   }, [counter]);
 
   return (
-    <div className="relative mx-auto mb-10 h-[90px] w-full max-w-[420px]">
+    <div className="relative mx-auto mb-10 h-[65px] sm:h-[90px] w-full max-w-[290px] sm:max-w-[420px]">
       <AnimatePresence mode="popLayout">
         {visible.map((notifIndex, stackIndex) => {
           const notif = notifications[notifIndex];
@@ -119,22 +119,23 @@ function NotificationStack({ started }: { started: boolean }) {
                 ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
                 layout: { duration: 0.4 },
               }}
-              className={`absolute inset-x-0 rounded-2xl border ${notif.border} bg-card/90 backdrop-blur-xl px-6 py-4 shadow-xl ${notif.glow}`}
+              className={`absolute inset-x-0 rounded-xl sm:rounded-2xl border ${notif.border} bg-card/90 backdrop-blur-xl px-3 py-2.5 sm:px-6 sm:py-4 shadow-xl ${notif.glow}`}
               style={{ zIndex: 10 - stackIndex }}
             >
-              <div className="flex items-center gap-3.5">
+              <div className="flex items-center gap-2.5 sm:gap-3.5">
                 <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${notif.bg} ${notif.color}`}
+                  className={`flex h-8 w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-lg sm:rounded-xl ${notif.bg} ${notif.color}`}
                 >
-                  <Icon size={22} />
+                  <Icon size={16} className="sm:hidden" />
+                  <Icon size={22} className="hidden sm:block" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-[15px] font-semibold text-foreground">
+                  <p className="text-xs sm:text-[15px] font-semibold text-foreground">
                     {notif.text}
                   </p>
-                  <p className="text-sm text-muted">{notif.detail}</p>
+                  <p className="text-[11px] sm:text-sm text-muted">{notif.detail}</p>
                 </div>
-                <span className="shrink-0 text-[10px] text-muted/50">
+                <span className="shrink-0 text-[9px] sm:text-[10px] text-muted/50">
                   hozir
                 </span>
               </div>
@@ -153,7 +154,7 @@ export function Hero() {
     // Heading 0.5s da ko'rinadi, keyin 1.5s kutib qolgan elementlar
     const timer = setTimeout(() => {
       setShowRest(true);
-    }, 1500);
+    }, 950);
     return () => clearTimeout(timer);
   }, []);
 
@@ -183,19 +184,36 @@ export function Hero() {
             <NotificationStack started={showRest} />
           </motion.div>
 
-          {/* Main heading — birinchi bo'lib ko'rinadi */}
-          <motion.h1
-            initial={{ opacity: 0, filter: "blur(12px)" }}
-            animate={{ opacity: 1, filter: "blur(0px)" }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-4xl font-extrabold leading-[1.2] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
-          >
-            O&apos;quv markazingiz
-            <br />
-            <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-              siz uchun ishlasin
-            </span>
-          </motion.h1>
+          {/* Main heading — 3D flip bilan ko'rinadi */}
+          <div style={{ perspective: "1000px" }}>
+            <motion.h1
+              initial={{ rotateX: 90, opacity: 0, filter: "blur(10px)" }}
+              animate={{ rotateX: 0, opacity: 1, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+              }}
+              style={{ transformOrigin: "center bottom" }}
+              className="text-4xl font-extrabold leading-[1.2] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
+            >
+              O&apos;quv markazingiz
+            </motion.h1>
+            <motion.p
+              initial={{ rotateX: -90, opacity: 0, filter: "blur(10px)" }}
+              animate={{ rotateX: 0, opacity: 1, filter: "blur(0px)" }}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+              }}
+              style={{ transformOrigin: "center top" }}
+              className="text-4xl font-extrabold leading-[1.2] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+            >
+              <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
+                siz uchun ishlasin
+              </span>
+            </motion.p>
+          </div>
 
           {/* Qolgan barcha elementlar — 1.5s da birdaniga */}
           <motion.div
@@ -205,15 +223,17 @@ export function Hero() {
           >
             {/* Subtitle */}
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
-              Ta&apos;lim bizneslari uchun natija beradigan IT tizimlar quramiz
+              Ta&apos;lim bizneslari uchun natija{" "}
+              <br className="sm:hidden" />
+              beradigan IT tizimlar quramiz
             </p>
 
             {/* CTA Buttons */}
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button href="/kontakt" variant="outline" size="lg" className="w-[240px]">
+            <div className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-4">
+              <Button href="/kontakt" variant="outline" size="default" className="w-[150px] sm:w-[240px] sm:py-4 sm:text-base">
                 Bog&apos;lanish
               </Button>
-              <Button href="/#xizmatlar" variant="outline" size="lg" className="w-[240px]">
+              <Button href="/#xizmatlar" variant="outline" size="default" className="w-[150px] sm:w-[240px] sm:py-4 sm:text-base">
                 Xizmatlar
               </Button>
             </div>

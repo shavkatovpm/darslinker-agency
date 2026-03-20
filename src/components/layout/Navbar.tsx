@@ -22,7 +22,7 @@ export function Navbar() {
     <motion.header
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: 0.95, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-primary/90 backdrop-blur-xl shadow-lg shadow-black/10"
@@ -54,8 +54,8 @@ export function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Button href="/kontakt" size="default">
-              Bepul konsultatsiya
+            <Button href="/kontakt" variant="outline" size="default">
+              Bog&apos;lanish
             </Button>
           </div>
 
@@ -92,8 +92,8 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="pt-4">
-                <Button href="/kontakt" className="w-full">
-                  Bepul konsultatsiya
+                <Button href="/kontakt" variant="outline" className="w-full">
+                  Bog&apos;lanish
                 </Button>
               </div>
             </div>
