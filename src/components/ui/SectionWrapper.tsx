@@ -23,7 +23,7 @@ export function SectionWrapper({
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={staggerContainer}
-      className={`py-20 md:py-28 ${dark ? "bg-card" : "bg-primary"} ${className}`}
+      className={`py-20 md:py-28 bg-primary ${className}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
     </motion.section>

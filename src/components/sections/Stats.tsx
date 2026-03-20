@@ -7,7 +7,7 @@ import { stats } from "@/lib/constants";
 
 export function Stats() {
   return (
-    <section className="relative overflow-hidden bg-gold py-20 md:py-24">
+    <section className="relative overflow-hidden bg-primary py-20 md:py-24">
       {/* Pattern */}
       <div
         className="absolute inset-0 opacity-10"
@@ -37,10 +37,10 @@ export function Stats() {
               variants={fadeInUp}
               className="text-center"
             >
-              <div className="text-4xl font-extrabold tracking-tight text-primary sm:text-5xl lg:text-6xl">
+              <div className="text-4xl font-extrabold tracking-tight text-gold sm:text-5xl lg:text-6xl">
                 {stat.value}
               </div>
-              <div className="mt-2 text-sm font-medium text-primary/70 sm:text-base">
+              <div className="mt-2 text-sm font-medium text-muted sm:text-base">
                 {stat.label}
               </div>
             </motion.div>

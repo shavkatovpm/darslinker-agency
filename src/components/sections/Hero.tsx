@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import {
   ArrowRight,
@@ -139,6 +139,21 @@ function NotificationStack({ started }: { started: boolean }) {
 
 export function Hero() {
   const [showRest, setShowRest] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -148,14 +163,14 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-primary pt-16 pb-24">
-      {/* Background gradient — faqat desktop */}
-      <div className="absolute inset-0 overflow-hidden hidden sm:block">
-        <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gold/5 blur-[120px]" />
-        <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-gold/3 blur-[100px]" />
-      </div>
+    <section ref={sectionRef} className="relative flex flex-col items-center justify-center overflow-hidden bg-primary pt-16 pb-24" style={{ minHeight: "100svh" }}>
+      {/* Background image — parallax */}
+      <motion.div className="absolute inset-0" style={isMobile ? {} : { y: bgY }}>
+        <img src="/hero-bg.jpg" alt="" className={`w-full object-cover ${isMobile ? "h-full" : "h-[120%]"}`} />
+        <div className="absolute inset-0 bg-primary/90" />
+      </motion.div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <motion.div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style={isMobile ? {} : { y: contentY, opacity: contentOpacity }}>
         <div className="mx-auto max-w-4xl text-center">
           {/* Notification Stack */}
           <motion.div
@@ -220,7 +235,7 @@ export function Hero() {
 
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent" />
