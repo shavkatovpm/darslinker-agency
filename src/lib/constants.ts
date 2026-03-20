@@ -13,8 +13,8 @@ export const siteConfig = {
 export const navLinks = [
   { label: "Xizmatlar", href: "/#xizmatlar" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Aloqa", href: "/kontakt" },
   { label: "Blog", href: "/blog" },
-  { label: "Kontakt", href: "/kontakt" },
 ];
 
 export const services = [
