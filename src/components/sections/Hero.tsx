@@ -48,7 +48,7 @@ const notifications = [
   },
   {
     icon: Users,
-    text: "Guruhga yangi o'quvchi qo'shildi",
+    text: "Yangi o'quvchi qo'shildi",
     detail: "Jasur - IELTS tayyorlov",
     color: "text-emerald-400",
     bg: "bg-emerald-500/10",
@@ -148,21 +148,14 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-primary">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-primary pt-16 pb-24">
       {/* Background gradient — faqat desktop */}
       <div className="absolute inset-0 overflow-hidden hidden sm:block">
         <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gold/5 blur-[120px]" />
         <div className="absolute -bottom-40 -left-40 h-[400px] w-[400px] rounded-full bg-gold/3 blur-[100px]" />
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,199,0,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,199,0,0.3) 1px, transparent 1px)`,
-            backgroundSize: "60px 60px",
-          }}
-        />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           {/* Notification Stack */}
           <motion.div
