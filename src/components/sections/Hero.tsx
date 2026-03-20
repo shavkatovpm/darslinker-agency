@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
   ArrowRight,
@@ -166,7 +167,7 @@ export function Hero() {
     <section ref={sectionRef} className="relative flex flex-col items-center justify-center overflow-hidden bg-primary pt-16 pb-24" style={{ minHeight: "100svh" }}>
       {/* Background image — parallax */}
       <motion.div className="absolute inset-0" style={isMobile ? {} : { y: bgY }}>
-        <img src="/hero-bg.jpg" alt="" className={`w-full object-cover ${isMobile ? "h-full" : "h-[120%]"}`} />
+        <Image src="/hero-bg.jpg" alt="" fill className="object-cover" priority sizes="100vw" quality={75} />
         <div className="absolute inset-0 bg-primary/90" />
       </motion.div>
 
