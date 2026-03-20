@@ -183,10 +183,10 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative flex flex-col items-center justify-center overflow-hidden bg-primary pt-16 pb-24" style={{ minHeight: "100svh" }}>
+    <section ref={sectionRef} className="relative overflow-hidden bg-primary pt-20 pb-28 sm:pt-28 sm:pb-36 md:pt-36 md:pb-44 lg:pt-44 lg:pb-52">
       {/* Background image — parallax */}
-      <div ref={bgRef} className="absolute inset-0 will-change-transform" style={{ top: "-10%" , bottom: "-10%" }}>
-        <Image src="/hero-bg.jpg" alt="" fill className="object-cover" priority sizes="100vw" quality={75} />
+      <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%" }}>
+        <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={75} />
         <div className="absolute inset-0 bg-primary/90" />
       </div>
 
