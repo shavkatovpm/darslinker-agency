@@ -88,7 +88,7 @@ function NotificationStack({ started }: { started: boolean }) {
   }, [counter]);
 
   return (
-    <div className="relative mx-auto mb-10 h-[75px] sm:h-[90px] w-full max-w-[340px] sm:max-w-[420px]">
+    <div className="relative mx-auto mt-6 mb-10 sm:mt-0 h-[75px] sm:h-[90px] w-full max-w-[340px] sm:max-w-[420px]">
       <AnimatePresence mode="popLayout">
         {visible.map((notifIndex, stackIndex) => {
           const notif = notifications[notifIndex];
@@ -187,7 +187,7 @@ export function Hero() {
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%" }}>
         <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={75} />
-        <div className="absolute inset-0 bg-primary/90" />
+        <div className="absolute inset-0 bg-primary/85" />
       </div>
 
       <div ref={contentRef} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
@@ -238,7 +238,7 @@ export function Hero() {
             animate={showRest ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70 sm:text-xl">
+            <p className="font-subtitle mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70 sm:text-xl">
               Ta&apos;lim bizneslari uchun natija{" "}
               <br className="sm:hidden" />
               beradigan IT tizimlar quramiz

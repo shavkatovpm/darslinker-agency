@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -7,6 +7,18 @@ import { PageWrapper } from "@/components/layout/PageWrapper";
 
 const inter = Inter({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const outfit = Outfit({
+  variable: "--font-subtitle",
   subsets: ["latin"],
   display: "swap",
 });
@@ -42,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" className={`${inter.variable} h-full antialiased`}>
+    <html lang="uz" className={`${inter.variable} ${spaceGrotesk.variable} ${outfit.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-primary">
         <PageWrapper>
           <Navbar />
