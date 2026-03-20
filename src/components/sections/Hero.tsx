@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
@@ -140,21 +140,9 @@ function NotificationStack({ started }: { started: boolean }) {
 
 export function Hero() {
   const [showRest, setShowRest] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-  }, []);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -163,15 +151,46 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const section = sectionRef.current;
+        if (!section) { ticking = false; return; }
+
+        const rect = section.getBoundingClientRect();
+        const sectionHeight = section.offsetHeight;
+        const progress = Math.max(0, Math.min(1, -rect.top / sectionHeight));
+
+        if (bgRef.current) {
+          bgRef.current.style.transform = `translate3d(0, ${progress * 30}%, 0)`;
+        }
+        if (contentRef.current) {
+          contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
+          contentRef.current.style.opacity = `${1 - progress * 1.2}`;
+        }
+
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section ref={sectionRef} className="relative flex flex-col items-center justify-center overflow-hidden bg-primary pt-16 pb-24" style={{ minHeight: "100svh" }}>
       {/* Background image — parallax */}
-      <motion.div className="absolute inset-0" style={isMobile ? {} : { y: bgY }}>
+      <div ref={bgRef} className="absolute inset-0 will-change-transform" style={{ top: "-10%" , bottom: "-10%" }}>
         <Image src="/hero-bg.jpg" alt="" fill className="object-cover" priority sizes="100vw" quality={75} />
         <div className="absolute inset-0 bg-primary/90" />
-      </motion.div>
+      </div>
 
-      <motion.div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" style={isMobile ? {} : { y: contentY, opacity: contentOpacity }}>
+      <div ref={contentRef} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
         <div className="mx-auto max-w-4xl text-center">
           {/* Notification Stack */}
           <motion.div
@@ -236,7 +255,7 @@ export function Hero() {
 
           </motion.div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent" />
