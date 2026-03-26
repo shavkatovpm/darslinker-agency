@@ -212,7 +212,7 @@ function HeroFeatures({ show }: { show: boolean }) {
 }
 
 export function Hero() {
-  const [showRest, setShowRest] = useState(false);
+  const [showRest, setShowRest] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -266,7 +266,14 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
       </div>
 
-      <div ref={contentRef} className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform" style={{ transition: "transform 0.15s linear" }}>
+      <motion.div
+        ref={contentRef}
+        initial={{ opacity: 0, filter: "blur(12px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform"
+        style={{ transition: "transform 0.15s linear" }}
+      >
         {/* Mobile: bitta parent container — text, cards, buttons */}
         <div className="md:hidden w-full max-w-full flex flex-col min-h-[calc(100vh-8rem)]">
           {/* Text card */}
@@ -393,7 +400,7 @@ export function Hero() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
 
 
       {/* Bottom fade */}
