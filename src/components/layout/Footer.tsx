@@ -25,7 +25,7 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <Link href="/" className="group flex items-center gap-2">
-              <Logo size={36} />
+              <Logo size={28} color="#ffffff" />
               <span className="text-lg font-bold text-foreground">
                 Darslinker Agency
               </span>

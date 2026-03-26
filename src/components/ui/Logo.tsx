@@ -3,9 +3,10 @@
 type LogoProps = {
   size?: number;
   animate?: boolean;
+  color?: string;
 };
 
-export function Logo({ size = 40, animate = false }: LogoProps) {
+export function Logo({ size = 40, animate = false, color = "#ffc700" }: LogoProps) {
   const layerSize = size * 0.7;
   const radius = size * 0.15;
   const halfLayer = layerSize / 2;
@@ -15,7 +16,7 @@ export function Logo({ size = 40, animate = false }: LogoProps) {
     width: layerSize,
     height: layerSize,
     borderRadius: radius,
-    background: "#ffc700",
+    background: color,
     top: "50%",
     marginTop: -halfLayer,
     left,

@@ -78,7 +78,7 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/" onClick={closeMenu} className="group flex items-center gap-2 transition-transform duration-300">
               <div className="scale-[0.7] -mr-2 sm:mr-0 sm:scale-100 origin-left">
-                <Logo size={36} animate />
+                <Logo size={36} />
               </div>
               <span className="text-[13px] font-bold text-foreground sm:text-lg">
                 Darslinker Agency
