@@ -242,7 +242,7 @@ export function Hero() {
       const progress = Math.max(0, Math.min(1, y / sectionHeight));
 
       if (bgRef.current) {
-        bgRef.current.style.transform = `translate3d(0, ${progress * 37}%, 0)`;
+        bgRef.current.style.transform = `translate3d(0, ${progress * 20}%, 0)`;
       }
       if (contentRef.current) {
         contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
@@ -256,12 +256,12 @@ export function Hero() {
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-32 sm:pt-0 pb-[8vh]">
       {/* Background image — parallax */}
-      <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%" }}>
+      <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%", transition: "transform 0.15s linear" }}>
         <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={50} />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
       </div>
 
-      <div ref={contentRef} className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
+      <div ref={contentRef} className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform" style={{ transition: "transform 0.15s linear" }}>
         {/* Mobile: bitta parent container — text, cards, buttons */}
         <div className="md:hidden w-full max-w-full flex flex-col min-h-[calc(100vh-8rem)]">
           {/* Text card */}
