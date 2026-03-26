@@ -73,7 +73,7 @@ export function CTA() {
             </motion.div>
 
             {/* Qadamlar */}
-            <motion.div variants={fadeInUp} className="mt-10 space-y-6 lg:space-y-7">
+            <motion.div variants={fadeInUp} className="mt-10 lg:mt-24 space-y-6 lg:space-y-7">
               <div className="flex items-center gap-5">
                 <div className="flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-lg lg:text-xl font-bold">1</div>
                 <span className="text-lg lg:text-xl text-foreground">Ariza qoldirasiz</span>

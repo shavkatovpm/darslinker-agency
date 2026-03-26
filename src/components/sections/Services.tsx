@@ -34,7 +34,7 @@ const services = [
   },
   {
     icon: Search,
-    title: "SEO",
+    title: "Google SEO",
     price: "$250",
     desc: "Google'da birinchi sahifaga chiqing. Doimiy organik mijozlar oqimi, reklama xarajatlarisiz.",
     features: [

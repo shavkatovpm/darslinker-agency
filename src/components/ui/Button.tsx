@@ -37,11 +37,15 @@ export function Button({
     lg: "px-8 py-4 text-base",
   };
 
-  const combinedClass = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+  // flex-1 va w- classlarni wrapper ga berish kerak
+  const wrapperClasses = className.split(" ").filter(c => c.startsWith("flex-") || c.startsWith("w-") || c.startsWith("min-w-")).join(" ");
+  const innerClasses = className.split(" ").filter(c => !c.startsWith("flex-") && !c.startsWith("w-") && !c.startsWith("min-w-")).join(" ");
+
+  const combinedClass = `${baseStyles} ${variants[variant]} ${sizes[size]} ${innerClasses} w-full`;
 
   if (href) {
     return (
-      <motion.div whileTap={{ scale: 0.98 }}>
+      <motion.div whileTap={{ scale: 0.98 }} className={wrapperClasses}>
         <Link href={href} className={combinedClass}>
           {children}
         </Link>

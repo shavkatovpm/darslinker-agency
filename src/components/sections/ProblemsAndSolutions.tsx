@@ -24,7 +24,7 @@ const items = [
     },
     solution: {
       icon: Search,
-      title: "SEO",
+      title: "Google SEO",
       desc: "Google'da topga chiqing, doimiy organik mijozlar oling",
       href: "/xizmatlar/seo",
     },

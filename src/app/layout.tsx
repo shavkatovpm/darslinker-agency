@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Outfit } from "next/font/google";
+import { Inter, Space_Grotesk, Outfit, Manrope } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -19,6 +19,12 @@ const spaceGrotesk = Space_Grotesk({
 
 const outfit = Outfit({
   variable: "--font-subtitle",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
 });
@@ -58,7 +64,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uz" className={`${inter.variable} ${spaceGrotesk.variable} ${outfit.variable} h-full antialiased`}>
+    <html lang="uz" className={`${inter.variable} ${spaceGrotesk.variable} ${outfit.variable} ${manrope.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-primary">
         <PageWrapper>
           <Navbar />

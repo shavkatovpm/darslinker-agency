@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import {
-  ArrowRight,
   UserPlus,
   CreditCard,
   CalendarCheck,
@@ -57,7 +56,7 @@ const notifications = [
   },
   {
     icon: Bell,
-    text: "Darslinkerdan orqali arizalardan",
+    text: "Darslinkerdan yangi ariza",
     detail: "11 ta o'quvchi kursga yozildi",
     color: "text-amber-400",
     bg: "bg-amber-500/10",
@@ -88,7 +87,7 @@ function NotificationStack({ started }: { started: boolean }) {
   }, [counter]);
 
   return (
-    <div className="relative mx-auto mt-6 mb-10 sm:mt-0 h-[75px] sm:h-[90px] w-full max-w-[340px] sm:max-w-[420px]">
+    <div className="relative mb-6 h-[75px] sm:h-[90px] w-full sm:mx-auto sm:max-w-[420px]">
       <AnimatePresence mode="popLayout">
         {visible.map((notifIndex, stackIndex) => {
           const notif = notifications[notifIndex];
@@ -100,7 +99,7 @@ function NotificationStack({ started }: { started: boolean }) {
               layout
               initial={{ opacity: 0, y: -20 }}
               animate={{
-                opacity: stackIndex === 0 ? 1 : stackIndex === 1 ? 0.4 : 0.15,
+                opacity: stackIndex === 0 ? 1 : 0,
                 y: stackIndex * 6,
                 scale: 1 - stackIndex * 0.05,
               }}
@@ -110,8 +109,8 @@ function NotificationStack({ started }: { started: boolean }) {
                 ease: "easeOut",
                 layout: { duration: 0.3 },
               }}
-              className={`absolute inset-x-0 rounded-xl sm:rounded-2xl border ${notif.border} bg-card px-4 py-3 sm:px-6 sm:py-4 shadow-lg`}
-              style={{ zIndex: 10 - stackIndex, willChange: "transform, opacity" }}
+              className={`absolute inset-x-0 rounded-xl sm:rounded-2xl border border-white/15 px-4 py-3 sm:px-6 sm:py-4 shadow-2xl shadow-black/30 ${stackIndex === 0 ? "" : "bg-[#2a2a2b]"}`}
+              style={{ zIndex: 10 - stackIndex, willChange: "transform, opacity", ...(stackIndex === 0 ? { background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" } : {}) }}
             >
               <div className="flex items-center gap-3 sm:gap-3.5">
                 <div
@@ -171,7 +170,6 @@ export function Hero() {
         }
         if (contentRef.current) {
           contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
-          contentRef.current.style.opacity = `${1 - progress * 1.2}`;
         }
 
         ticking = false;
@@ -186,74 +184,122 @@ export function Hero() {
     <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-[8vh]">
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%" }}>
-        <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={75} />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/85 to-[#232324]" />
+        <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={50} />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
       </div>
 
-      <div ref={contentRef} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
-        <div className="mx-auto max-w-4xl text-center">
-          {/* Notification Stack */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={showRest ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <NotificationStack started={showRest} />
-          </motion.div>
-
-          {/* Main heading — 3D flip */}
-          <div style={{ perspective: "1000px" }}>
-            <motion.h1
-              initial={{ rotateX: 90, opacity: 0 }}
-              animate={{ rotateX: 0, opacity: 1 }}
-              transition={{
-                duration: 0.7,
-                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-              }}
-              style={{ transformOrigin: "center bottom", willChange: "transform, opacity" }}
-              className="text-4xl font-extrabold leading-[1.2] tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
+      <div ref={contentRef} className="relative mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 will-change-transform">
+        {/* Mobile: bitta parent container — text, cards, buttons */}
+        <div className="md:hidden w-full max-w-full">
+          {/* Text card */}
+          <div className="w-full rounded-2xl border border-white/15 px-4 py-5 overflow-hidden shadow-lg shadow-black/30" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" }}>
+            <div style={{ perspective: "1000px" }}>
+              <motion.h1
+                initial={{ rotateX: 90, opacity: 0 }}
+                animate={{ rotateX: 0, opacity: 1 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+                style={{ transformOrigin: "center bottom", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
+                className="font-extrabold leading-[1.2] tracking-tight text-foreground text-xl"
+              >
+                Ta&apos;lim yo&apos;nalishlari uchun
+              </motion.h1>
+              <motion.p
+                initial={{ rotateX: -90, opacity: 0 }}
+                animate={{ rotateX: 0, opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+                style={{ transformOrigin: "center top", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
+                className="font-extrabold leading-[1.2] tracking-wide text-lg"
+              >
+                <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
+                  raqamli yechimlar taklif qilamiz
+                </span>
+              </motion.p>
+            </div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={showRest ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.4 }}
             >
-              O&apos;quv markazingiz
-            </motion.h1>
-            <motion.p
-              initial={{ rotateX: -90, opacity: 0 }}
-              animate={{ rotateX: 0, opacity: 1 }}
-              transition={{
-                duration: 0.7,
-                delay: 0.12,
-                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-              }}
-              style={{ transformOrigin: "center top", willChange: "transform, opacity" }}
-              className="text-4xl font-extrabold leading-[1.2] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
-            >
-              <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                siz uchun ishlasin
-              </span>
-            </motion.p>
+              <p className="font-subtitle mt-3 text-xs leading-relaxed text-foreground/70">
+                O&apos;quv markazingiz uchun natijali tizim ishlab chiqamiz
+              </p>
+            </motion.div>
           </div>
 
-          {/* Qolgan elementlar */}
+          {/* Notification cards + Buttons */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={showRest ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.4 }}
+            className="mt-6"
           >
-            <p className="font-subtitle mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70 sm:text-xl">
-              Ta&apos;lim bizneslari uchun natija{" "}
-              <br className="sm:hidden" />
-              beradigan IT tizimlar quramiz
-            </p>
-
-            <div className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-4">
-              <Button href="/kontakt" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
+            <NotificationStack started={showRest} />
+            <div className="flex flex-row gap-3">
+              <Button href="/kontakt" variant="outline" size="default" className="flex-1 text-xs !border-white/15 !bg-[rgba(255,255,255,0.1)]">
                 Bog&apos;lanish
               </Button>
-              <Button href="/#xizmatlar" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
+              <Button href="/#xizmatlar" variant="outline" size="default" className="flex-1 text-xs !border-white/15 !bg-[rgba(255,255,255,0.1)]">
                 Xizmatlar
               </Button>
             </div>
-
           </motion.div>
+        </div>
+
+        {/* Desktop: centered layout (current) */}
+        <div className="hidden md:block">
+          <div className="mx-auto max-w-4xl text-center">
+            {/* Notification Stack */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={showRest ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <NotificationStack started={showRest} />
+            </motion.div>
+
+            {/* Main heading — 3D flip */}
+            <div style={{ perspective: "1000px" }}>
+              <motion.h1
+                initial={{ rotateX: 90, opacity: 0 }}
+                animate={{ rotateX: 0, opacity: 1 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+                style={{ transformOrigin: "center bottom", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
+                className="whitespace-nowrap font-extrabold leading-[1.2] tracking-tight text-foreground text-[clamp(1.6rem,7.5vw,4.5rem)]"
+              >
+                Ta&apos;lim yo&apos;nalishlari uchun
+              </motion.h1>
+              <motion.p
+                initial={{ rotateX: -90, opacity: 0 }}
+                animate={{ rotateX: 0, opacity: 1 }}
+                transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+                style={{ transformOrigin: "center top", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
+                className="whitespace-nowrap font-extrabold leading-[1.2] tracking-wide text-[clamp(1.1rem,5.2vw,3.32rem)]"
+              >
+                <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
+                  raqamli yechimlar taklif qilamiz
+                </span>
+              </motion.p>
+            </div>
+
+            {/* Qolgan elementlar */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={showRest ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <p className="font-subtitle mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70 sm:text-xl">
+                O&apos;quv markazingiz uchun natijali tizim ishlab chiqamiz
+              </p>
+              <div className="mt-10 flex flex-row items-center justify-center gap-4">
+                <Button href="/kontakt" variant="outline" size="default" className="w-[240px] px-6 py-4 text-base">
+                  Bog&apos;lanish
+                </Button>
+                <Button href="/#xizmatlar" variant="outline" size="default" className="w-[240px] px-6 py-4 text-base">
+                  Xizmatlar
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
 
