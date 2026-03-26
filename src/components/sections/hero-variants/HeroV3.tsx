@@ -11,8 +11,6 @@ import {
   TrendingUp,
   Bell,
   Users,
-  Send,
-  Layers,
 } from "lucide-react";
 
 const notifications = [
@@ -89,7 +87,7 @@ function NotificationStack({ started }: { started: boolean }) {
   }, [counter]);
 
   return (
-    <div className="relative mb-4 h-[80px] sm:h-[90px] w-full sm:mx-auto sm:max-w-[420px]">
+    <div className="relative h-[75px] sm:h-[90px] w-full max-w-[340px] sm:max-w-[420px]">
       <AnimatePresence mode="popLayout">
         {visible.map((notifIndex, stackIndex) => {
           const notif = notifications[notifIndex];
@@ -101,7 +99,7 @@ function NotificationStack({ started }: { started: boolean }) {
               layout
               initial={{ opacity: 0, y: -20 }}
               animate={{
-                opacity: stackIndex === 0 ? 1 : 0,
+                opacity: stackIndex === 0 ? 1 : stackIndex === 1 ? 0.25 : 0.08,
                 y: stackIndex * 6,
                 scale: 1 - stackIndex * 0.05,
               }}
@@ -111,8 +109,8 @@ function NotificationStack({ started }: { started: boolean }) {
                 ease: "easeOut",
                 layout: { duration: 0.3 },
               }}
-              className={`absolute inset-x-0 rounded-xl sm:rounded-2xl border border-white/15 px-4 py-3.5 sm:px-6 sm:py-4 shadow-2xl shadow-black/30 ${stackIndex === 0 ? "" : "bg-[#2a2a2b]"}`}
-              style={{ zIndex: 10 - stackIndex, willChange: "transform, opacity", ...(stackIndex === 0 ? { background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" } : {}) }}
+              className="absolute inset-x-0 rounded-xl sm:rounded-2xl border border-white/[0.12] bg-[#2a2a2b]/95 backdrop-blur-sm px-4 py-3 sm:px-6 sm:py-4 shadow-2xl shadow-black/20"
+              style={{ zIndex: 10 - stackIndex, willChange: "transform, opacity" }}
             >
               <div className="flex items-center gap-3 sm:gap-3.5">
                 <div
@@ -122,7 +120,7 @@ function NotificationStack({ started }: { started: boolean }) {
                   <Icon size={22} className="hidden sm:block" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm sm:text-[15px] font-semibold text-foreground">
+                  <p className="text-[13px] sm:text-[15px] font-semibold text-foreground">
                     {notif.text}
                   </p>
                   <p className="text-xs sm:text-sm text-muted">{notif.detail}</p>
@@ -139,7 +137,7 @@ function NotificationStack({ started }: { started: boolean }) {
   );
 }
 
-export function Hero() {
+export function HeroV3() {
   const [showRest, setShowRest] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -153,25 +151,29 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    let lastY = 0;
+    let ticking = false;
 
     const handleScroll = () => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastY) < 2) return;
-      lastY = y;
+      if (ticking) return;
+      ticking = true;
 
-      const section = sectionRef.current;
-      if (!section) return;
+      requestAnimationFrame(() => {
+        const section = sectionRef.current;
+        if (!section) { ticking = false; return; }
 
-      const sectionHeight = section.offsetHeight;
-      const progress = Math.max(0, Math.min(1, y / sectionHeight));
+        const rect = section.getBoundingClientRect();
+        const sectionHeight = section.offsetHeight;
+        const progress = Math.max(0, Math.min(1, -rect.top / sectionHeight));
 
-      if (bgRef.current) {
-        bgRef.current.style.transform = `translate3d(0, ${progress * 37}%, 0)`;
-      }
-      if (contentRef.current) {
-        contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
-      }
+        if (bgRef.current) {
+          bgRef.current.style.transform = `translate3d(0, ${progress * 37}%, 0)`;
+        }
+        if (contentRef.current) {
+          contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
+        }
+
+        ticking = false;
+      });
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -186,83 +188,19 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
       </div>
 
-      <div ref={contentRef} className="relative mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 will-change-transform">
-        {/* Mobile: bitta parent container — text, cards, buttons */}
-        <div className="md:hidden w-full max-w-full">
-          {/* Text card */}
-          <div className="w-full rounded-2xl border border-white/15 px-4 py-5 overflow-hidden shadow-lg shadow-black/30" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" }}>
+      <div ref={contentRef} className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
+        {/* Mobile: cards top, content below. Desktop: 50/50 split */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
+          {/* Left side — heading + subtitle + buttons */}
+          <div className="order-2 lg:order-1 lg:w-1/2 text-left">
             <div style={{ perspective: "1000px" }}>
               <motion.h1
                 initial={{ rotateX: 90, opacity: 0 }}
                 animate={{ rotateX: 0, opacity: 1 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-                style={{ transformOrigin: "center bottom", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
-                className="font-extrabold leading-[1.2] tracking-tight text-foreground text-xl"
-              >
-                Ta&apos;lim yo&apos;nalishlari uchun
-              </motion.h1>
-              <motion.p
-                initial={{ rotateX: -90, opacity: 0 }}
-                animate={{ rotateX: 0, opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-                style={{ transformOrigin: "center top", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
-                className="font-extrabold leading-[1.2] tracking-wide text-lg"
-              >
-                <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-                  raqamli yechimlar taklif qilamiz
-                </span>
-              </motion.p>
-            </div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={showRest ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <p className="font-subtitle mt-3 text-xs leading-relaxed text-foreground/70">
-                O&apos;quv markazingiz uchun natijali tizim ishlab chiqamiz
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Notification cards + Buttons */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={showRest ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="mt-4"
-          >
-            <NotificationStack started={showRest} />
-            <div className="flex flex-row gap-3">
-              <Button href="/kontakt" variant="outline" size="default" className="flex-1 text-sm !border-white/15 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5">
-                <Send size={14} className="mr-1.5" />
-                Bog&apos;lanish
-              </Button>
-              <Button href="/#xizmatlar" variant="outline" size="default" className="flex-1 text-sm !border-white/15 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5">
-                <Layers size={14} className="mr-1.5" />
-                Xizmatlar
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Desktop: centered layout (current) */}
-        <div className="hidden md:block">
-          <div className="mx-auto max-w-4xl text-center">
-            {/* Notification Stack */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={showRest ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <NotificationStack started={showRest} />
-            </motion.div>
-
-            {/* Main heading — 3D flip */}
-            <div style={{ perspective: "1000px" }}>
-              <motion.h1
-                initial={{ rotateX: 90, opacity: 0 }}
-                animate={{ rotateX: 0, opacity: 1 }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+                transition={{
+                  duration: 0.7,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
                 style={{ transformOrigin: "center bottom", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
                 className="whitespace-nowrap font-extrabold leading-[1.2] tracking-tight text-foreground text-[clamp(1.6rem,7.5vw,4.5rem)]"
               >
@@ -271,7 +209,11 @@ export function Hero() {
               <motion.p
                 initial={{ rotateX: -90, opacity: 0 }}
                 animate={{ rotateX: 0, opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+                transition={{
+                  duration: 0.7,
+                  delay: 0.12,
+                  ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                }}
                 style={{ transformOrigin: "center top", willChange: "transform, opacity", fontFamily: "var(--font-manrope), sans-serif" }}
                 className="whitespace-nowrap font-extrabold leading-[1.2] tracking-wide text-[clamp(1.1rem,5.2vw,3.32rem)]"
               >
@@ -281,25 +223,35 @@ export function Hero() {
               </motion.p>
             </div>
 
-            {/* Qolgan elementlar */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={showRest ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <p className="font-subtitle mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70 sm:text-xl">
+              <p className="font-subtitle mt-6 max-w-xl text-lg leading-relaxed text-foreground/70 sm:text-xl">
                 O&apos;quv markazingiz uchun natijali tizim ishlab chiqamiz
               </p>
-              <div className="mt-10 flex flex-row items-center justify-center gap-4">
-                <Button href="/kontakt" variant="outline" size="default" className="w-[240px] px-6 py-4 text-base">
+
+              <div className="mt-10 flex flex-row items-center gap-3 sm:gap-4">
+                <Button href="/kontakt" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
                   Bog&apos;lanish
                 </Button>
-                <Button href="/#xizmatlar" variant="outline" size="default" className="w-[240px] px-6 py-4 text-base">
+                <Button href="/#xizmatlar" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
                   Xizmatlar
                 </Button>
               </div>
             </motion.div>
           </div>
+
+          {/* Right side — notification cards vertically centered */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={showRest ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="order-1 lg:order-2 lg:w-1/2 flex justify-center lg:justify-center mb-8 lg:mb-0"
+          >
+            <NotificationStack started={showRest} />
+          </motion.div>
         </div>
       </div>
 
