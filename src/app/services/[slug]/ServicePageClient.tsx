@@ -62,7 +62,7 @@ export function ServicePageClient({ service }: { service: Service }) {
           </motion.p>
 
           <motion.div variants={fadeInUp} className="mt-8">
-            <Button href="/kontakt" size="lg">
+            <Button href="/contact" size="lg">
               Bepul konsultatsiya
               <ArrowRight size={18} className="ml-2" />
             </Button>
@@ -158,7 +158,7 @@ export function ServicePageClient({ service }: { service: Service }) {
             Bepul demo yoki maslahat olish uchun bog&apos;laning
           </motion.p>
           <motion.div variants={fadeInUp} className="mt-8">
-            <Button href="/kontakt" size="lg">
+            <Button href="/contact" size="lg">
               Demo olish
               <ArrowRight size={18} className="ml-2" />
             </Button>

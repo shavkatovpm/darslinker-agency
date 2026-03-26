@@ -89,8 +89,8 @@ const Sub = ({ cls = "text-xl" }: { cls?: string }) => (
 );
 const Btns = ({ col = false }: { col?: boolean }) => (
   <div className={`flex gap-4 ${col ? "flex-col" : ""}`}>
-    <Button href="/kontakt" variant="outline" size="default" className={`px-6 py-4 text-base ${glassBtn}`}><Send size={16} className="mr-2" /> Bog&apos;lanish</Button>
-    <Button href="/#xizmatlar" variant="outline" size="default" className={`px-6 py-4 text-base ${glassBtn}`}><Layers size={16} className="mr-2" /> Xizmatlar</Button>
+    <Button href="/contact" variant="outline" size="default" className={`px-6 py-4 text-base ${glassBtn}`}><Send size={16} className="mr-2" /> Bog&apos;lanish</Button>
+    <Button href="/#services" variant="outline" size="default" className={`px-6 py-4 text-base ${glassBtn}`}><Layers size={16} className="mr-2" /> Xizmatlar</Button>
   </div>
 );
 

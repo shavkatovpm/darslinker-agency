@@ -20,39 +20,39 @@ const items = [
     problem: {
       icon: DollarSign,
       title: "Reklama pulisiz ketadi",
-      desc: "Har oy reklama to'laysiz, lekin natija kafolatlanmaydi",
+      desc: "Har oy reklama to'laysiz, lekin natija vaqtinchalik",
     },
     solution: {
       icon: Search,
       title: "Google SEO",
       desc: "Google'da topga chiqing, doimiy organik mijozlar oling",
-      href: "/xizmatlar/seo",
+      href: "/services/seo",
     },
   },
   {
     problem: {
       icon: AlertTriangle,
-      title: "Hamma narsa tarqoq",
+      title: "Hamma narsa chalkash",
       desc: "Jadval, to'lov, davomat — boshqa-boshqa joyda, bosh qotadi",
     },
     solution: {
       icon: Database,
       title: "CRM/ERP tizim",
       desc: "O'quvchi, to'lov, jadval — barchasi bir tizimda",
-      href: "/xizmatlar/crm",
+      href: "/services/crm",
     },
   },
   {
     problem: {
       icon: BarChart3,
       title: "Raqobatda orqadasiz",
-      desc: "Professional ko'rinish yo'q, websitesiz raqobatchilardan orqada",
+      desc: "Professional ko'rinish yo'q, raqobatchilar sizdan o'tib ketayotgandek",
     },
     solution: {
       icon: Globe,
-      title: "Website yaratish",
+      title: "Website ishlab chiqish",
       desc: "Konversiya qiladigan professional website",
-      href: "/xizmatlar/website",
+      href: "/services/website",
     },
   },
 ];
@@ -75,7 +75,7 @@ const itemVariants = {
 
 export function ProblemsAndSolutions() {
   return (
-    <SectionWrapper id="xizmatlar">
+    <SectionWrapper id="problems">
       <div className="mx-auto max-w-3xl text-center mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -84,9 +84,10 @@ export function ProblemsAndSolutions() {
           transition={{ duration: 0.5 }}
           className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl md:text-5xl"
         >
-          Muammoni bilamiz.{" "}
-          <span className="bg-gradient-to-r from-gold to-amber-400 bg-clip-text text-transparent">
-            Yechimni beramiz.
+          Muammodan
+          <br className="sm:hidden" />{" "}
+          <span className="bg-gradient-to-r from-[#ffcf00] to-[#ffab00] bg-clip-text text-transparent">
+            yechimgacha
           </span>
         </motion.h2>
       </div>

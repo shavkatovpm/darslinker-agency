@@ -11,16 +11,16 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { label: "Xizmatlar", href: "/#xizmatlar" },
+  { label: "Xizmatlar", href: "/#services" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "Aloqa", href: "/kontakt" },
+  { label: "Aloqa", href: "/contact" },
   { label: "Blog", href: "/blog" },
 ];
 
 export const services = [
   {
     slug: "website",
-    title: "Website yaratish",
+    title: "Website ishlab chiqish",
     shortDesc: "Konversiya qiladigan professional website",
     heroTitle: "Ta'lim markazingizning websitesi yo'qmi yoki eskirganmi?",
     heroDesc:

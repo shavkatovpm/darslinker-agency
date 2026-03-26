@@ -14,46 +14,44 @@ const serviceOptions = [
   { value: "other", label: "Boshqa" },
 ];
 
-export function CTA() {
+export function ContactPageClient() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    // TODO: Telegram bot integratsiyasi keyinroq
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
     setSubmitted(true);
   }
 
   return (
-    <section id="aloqa" className="relative overflow-hidden py-24 md:py-32">
+    <section className="pt-24 pb-8 md:py-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-start">
-          {/* Chap tomon — sarlavha va kontakt */}
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-16 items-start">
+          {/* Chap — sarlavha + kontakt */}
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            animate="visible"
             variants={staggerContainer}
           >
-            <motion.h2
+            <motion.h1
               variants={fadeInUp}
-              className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+              className="text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
               Ariza qoldiring
-            </motion.h2>
+            </motion.h1>
 
             <motion.p
               variants={fadeInUp}
-              className="mt-5 max-w-md text-lg text-muted"
+              className="mt-2 sm:mt-5 max-w-md text-sm sm:text-lg text-muted"
             >
               O&apos;quv markazingiz uchun to&apos;g&apos;ri yechimni birgalikda topamiz.
             </motion.p>
 
-            {/* Kontakt linklar */}
-            <motion.div variants={fadeInUp} className="mt-8 flex flex-wrap gap-3">
+            {/* Kontakt linklar — faqat desktop */}
+            <motion.div variants={fadeInUp} className="mt-8 hidden lg:flex flex-wrap gap-3">
               <a
                 href={siteConfig.telegram}
                 target="_blank"
@@ -72,28 +70,27 @@ export function CTA() {
               </a>
             </motion.div>
 
-            {/* Qadamlar */}
-            <motion.div variants={fadeInUp} className="mt-10 lg:mt-24 space-y-6 lg:space-y-7">
+            {/* Qadamlar — faqat desktop */}
+            <motion.div variants={fadeInUp} className="mt-10 lg:mt-24 space-y-6 lg:space-y-7 hidden lg:block">
               <div className="flex items-center gap-5">
-                <div className="flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-lg lg:text-xl font-bold">1</div>
-                <span className="text-lg lg:text-xl text-foreground">Ariza qoldirasiz</span>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-xl font-bold">1</div>
+                <span className="text-xl text-foreground">Ariza qoldirasiz</span>
               </div>
               <div className="flex items-center gap-5">
-                <div className="flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-lg lg:text-xl font-bold">2</div>
-                <span className="text-lg lg:text-xl text-foreground">Tahlil qilamiz</span>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-xl font-bold">2</div>
+                <span className="text-xl text-foreground">Tahlil qilamiz</span>
               </div>
               <div className="flex items-center gap-5">
-                <div className="flex h-12 w-12 lg:h-14 lg:w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-lg lg:text-xl font-bold">3</div>
-                <span className="text-lg lg:text-xl text-foreground">Yechim beramiz</span>
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold text-xl font-bold">3</div>
+                <span className="text-xl text-foreground">Yechim beramiz</span>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* O'ng tomon — forma */}
+          {/* O'ng — forma */}
           <motion.div
             initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
+            animate="visible"
             variants={staggerContainer}
           >
             {submitted ? (
@@ -115,31 +112,31 @@ export function CTA() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 sm:p-8 space-y-5"
+                className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.04] p-4 sm:p-8 space-y-3 sm:space-y-5"
               >
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="cta-name" className="mb-2 block text-sm font-medium text-foreground">
+                  <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-foreground">
                     Ismingiz
                   </label>
                   <input
                     type="text"
-                    id="cta-name"
+                    id="contact-name"
                     name="name"
                     required
                     placeholder="Ismingizni kiriting"
-                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-foreground placeholder:text-muted/50 transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
+                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3 text-foreground placeholder:text-muted/50 transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
                   />
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="cta-phone" className="mb-2 block text-sm font-medium text-foreground">
+                  <label htmlFor="contact-phone" className="mb-2 block text-sm font-medium text-foreground">
                     Telefon raqamingiz
                   </label>
                   <div className="flex rounded-xl border border-white/[0.08] transition-colors focus-within:border-gold/50 focus-within:ring-1 focus-within:ring-gold/20">
                     <span className="flex items-center rounded-l-xl bg-white/[0.06] px-4 text-sm text-muted border-r border-white/[0.08]">+998</span>
                     <input
                       type="tel"
-                      id="cta-phone"
+                      id="contact-phone"
                       name="phone"
                       required
                       maxLength={12}
@@ -152,34 +149,33 @@ export function CTA() {
                         if (val.length > 9) val = val.slice(0, 9) + " " + val.slice(9);
                         input.value = val;
                       }}
-                      className="w-full rounded-r-xl bg-white/[0.04] px-4 py-3.5 text-foreground placeholder:text-muted/50 focus:outline-none"
+                      className="w-full rounded-r-xl bg-white/[0.04] px-4 py-3 text-foreground placeholder:text-muted/50 focus:outline-none"
                     />
                   </div>
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="cta-center" className="mb-2 block text-sm font-medium text-foreground">
+                  <label htmlFor="contact-center" className="mb-2 block text-sm font-medium text-foreground">
                     O&apos;quv markazi nomi
                   </label>
                   <input
                     type="text"
-                    id="cta-center"
+                    id="contact-center"
                     name="center"
                     placeholder="Masalan: Najot Ta'lim"
-                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-foreground placeholder:text-muted/50 transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
+                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3 text-foreground placeholder:text-muted/50 transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
                   />
                 </motion.div>
 
-
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="cta-service" className="mb-2 block text-sm font-medium text-foreground">
+                  <label htmlFor="contact-service" className="mb-2 block text-sm font-medium text-foreground">
                     Xizmat turi
                   </label>
                   <select
-                    id="cta-service"
+                    id="contact-service"
                     name="service"
                     required
-                    className="w-full appearance-none rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 pr-10 text-foreground transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
+                    className="w-full appearance-none rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3 pr-10 text-foreground transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
                     style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239a9a9a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: "no-repeat", backgroundPosition: "right 16px center" }}
                   >
                     <option value="" className="bg-[#2d2d2e]">Tanlang...</option>
@@ -192,19 +188,18 @@ export function CTA() {
                 </motion.div>
 
                 <motion.div variants={fadeInUp}>
-                  <label htmlFor="cta-message" className="mb-2 block text-sm font-medium text-foreground">
+                  <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-foreground">
                     Xabaringiz
                   </label>
                   <textarea
-                    id="cta-message"
+                    id="contact-message"
                     name="message"
                     rows={3}
                     placeholder="Rejalaringiz haqida qisqacha yozing..."
-                    className="w-full resize-none rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-foreground placeholder:text-muted/50 transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
+                    className="w-full resize-none rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3 text-foreground placeholder:text-muted/50 transition-colors focus:border-gold/50 focus:outline-none focus:ring-1 focus:ring-gold/20"
                   />
                 </motion.div>
 
-                {/* Honeypot */}
                 <div className="hidden">
                   <input type="text" name="website" tabIndex={-1} />
                 </div>

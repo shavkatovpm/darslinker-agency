@@ -329,11 +329,11 @@ export function Hero() {
             className="mt-16"
           >
             <div className="flex flex-row gap-3">
-              <Button href="/kontakt" variant="outline" size="default" className="flex-1 text-sm !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5 transition-colors duration-300">
+              <Button href="/contact" variant="outline" size="default" className="flex-1 text-sm !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5 transition-colors duration-300">
                 <Send size={14} className="mr-1.5" />
                 Bog&apos;lanish
               </Button>
-              <Button href="/#xizmatlar" variant="outline" size="default" className="flex-1 text-sm !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5 transition-colors duration-300">
+              <Button href="/#services" variant="outline" size="default" className="flex-1 text-sm !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5 transition-colors duration-300">
                 <Layers size={14} className="mr-1.5" />
                 Xizmatlar
               </Button>
@@ -372,10 +372,10 @@ export function Hero() {
                 O&apos;quv markazingiz siz uchun ishlasin
               </p>
               <div className="mt-8 flex gap-4">
-                <Button href="/kontakt" variant="outline" size="default" className={`px-6 py-4 text-base !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.08)] !text-white transition-colors duration-300`}>
+                <Button href="/contact" variant="outline" size="default" className={`px-6 py-4 text-base !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.08)] !text-white transition-colors duration-300`}>
                   <Send size={16} className="mr-2" /> Bog&apos;lanish
                 </Button>
-                <Button href="/#xizmatlar" variant="outline" size="default" className={`px-6 py-4 text-base !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.08)] !text-white transition-colors duration-300`}>
+                <Button href="/#services" variant="outline" size="default" className={`px-6 py-4 text-base !border-white/15 hover:!border-white/50 !bg-[rgba(255,255,255,0.08)] !text-white transition-colors duration-300`}>
                   <Layers size={16} className="mr-2" /> Xizmatlar
                 </Button>
               </div>

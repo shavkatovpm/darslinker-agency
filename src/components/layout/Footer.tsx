@@ -12,9 +12,9 @@ const socialLinks = [
 ];
 
 const serviceLinks = [
-  { label: "Website yaratish", href: "/xizmatlar/website" },
-  { label: "CRM/ERP tizim", href: "/xizmatlar/crm" },
-  { label: "SEO xizmati", href: "/xizmatlar/seo" },
+  { label: "Website ishlab chiqish", href: "/services/website" },
+  { label: "CRM/ERP tizim", href: "/services/crm" },
+  { label: "SEO xizmati", href: "/services/seo" },
 ];
 
 export function Footer() {

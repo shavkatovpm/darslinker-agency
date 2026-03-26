@@ -11,14 +11,14 @@ const problems = [
     icon: DollarSign,
     title: "Reklama pulisiz ketadi",
     description:
-      "Yangi o'quvchi topish uchun har oy reklama to'laysiz, lekin natija kafolatlanmaydi. Pul ketadi, mijoz kelmaydi.",
+      "Yangi o'quvchi topish uchun har oy reklama to'laysiz, lekin natija vaqtinchalik. Pul ketadi, mijoz kelmaydi.",
     color: "from-red-500/20 to-red-500/5",
     iconColor: "text-red-400",
     borderColor: "border-red-500/20",
   },
   {
     icon: AlertTriangle,
-    title: "Hamma narsa tarqoq",
+    title: "Hamma narsa chalkash",
     description:
       "Jadval, to'lov, davomat — hammasi boshqa-boshqa joyda. Excel, daftar, Telegram — boshingiz qotib ketadi.",
     color: "from-amber-500/20 to-amber-500/5",

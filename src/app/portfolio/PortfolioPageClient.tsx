@@ -97,7 +97,7 @@ export function PortfolioPageClient() {
             Biznesingiz uchun professional IT yechim yaratamiz
           </motion.p>
           <motion.div variants={fadeInUp} className="mt-8">
-            <Button href="/kontakt" size="lg">
+            <Button href="/contact" size="lg">
               Loyihani boshlash
               <ArrowRight size={18} className="ml-2" />
             </Button>

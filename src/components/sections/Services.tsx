@@ -8,7 +8,7 @@ import Link from "next/link";
 const services = [
   {
     icon: Globe,
-    title: "Website yaratish",
+    title: "Website ishlab chiqish",
     price: "$250",
     desc: "Konversiya qiladigan professional website. Mobile-first dizayn, SEO optimizatsiya, tez yuklanish.",
     features: [
@@ -17,7 +17,7 @@ const services = [
       "Kontakt forma integratsiya",
       "Admin panel",
     ],
-    href: "/xizmatlar/website",
+    href: "/services/website",
   },
   {
     icon: Database,
@@ -30,7 +30,7 @@ const services = [
       "Dars jadvali",
       "Hisobotlar va statistika",
     ],
-    href: "/xizmatlar/crm",
+    href: "/services/crm",
   },
   {
     icon: Search,
@@ -43,7 +43,7 @@ const services = [
       "Kontent strategiya",
       "Oylik hisobot",
     ],
-    href: "/xizmatlar/seo",
+    href: "/services/seo",
   },
 ];
 
@@ -65,7 +65,7 @@ const cardVariants = {
 
 export function Services() {
   return (
-    <SectionWrapper id="narxlar">
+    <SectionWrapper id="services">
       <div className="mx-auto max-w-3xl text-center mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ export function Services() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-4 text-muted text-base sm:text-lg"
         >
-          Aniq narxlar. Aniq natija.
+          To&apos;g&apos;ri strategiya, barqaror natija
         </motion.p>
       </div>
 

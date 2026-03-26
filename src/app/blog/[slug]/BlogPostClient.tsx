@@ -204,7 +204,7 @@ export function BlogPostClient({ post }: { post: BlogPost }) {
               Bepul konsultatsiya oling — sizga eng mos yechimni taklif
               etamiz
             </p>
-            <Button href="/kontakt">
+            <Button href="/contact">
               Bog&apos;lanish
               <ArrowRight size={16} className="ml-2" />
             </Button>

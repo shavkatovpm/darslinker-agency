@@ -232,10 +232,10 @@ export function HeroV4() {
             </p>
 
             <div className="mt-10 flex flex-row items-center justify-center gap-3 sm:gap-4">
-              <Button href="/kontakt" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
+              <Button href="/contact" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
                 Bog&apos;lanish
               </Button>
-              <Button href="/#xizmatlar" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
+              <Button href="/#services" variant="outline" size="default" className="w-[105px] px-3 py-2 text-xs sm:w-[240px] sm:px-6 sm:py-4 sm:text-base">
                 Xizmatlar
               </Button>
             </div>

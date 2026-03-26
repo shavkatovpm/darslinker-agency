@@ -76,7 +76,7 @@ export function Navbar() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="flex h-18 items-center justify-between">
             {/* Logo */}
-            <Link href="/" onClick={closeMenu} className="group flex items-center gap-2 transition-transform duration-300">
+            <Link href="/" onClick={(e) => { closeMenu(); if (window.location.pathname === "/") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); } }} className="group flex items-center gap-2 transition-transform duration-300">
               <div className="scale-[0.7] -mr-2 sm:mr-0 sm:scale-100 origin-left">
                 <Logo size={36} />
               </div>
@@ -100,7 +100,7 @@ export function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden md:block">
-              <Button href="/kontakt" variant="outline" size="default">
+              <Button href="/contact" variant="outline" size="default">
                 Ariza qoldirish
               </Button>
             </div>
@@ -138,7 +138,7 @@ export function Navbar() {
                   </Link>
                 ))}
                 <div className="pt-4">
-                  <Button href="/kontakt" variant="outline" className="w-full">
+                  <Button href="/contact" variant="outline" className="w-full">
                     Ariza qoldirish
                   </Button>
                 </div>
