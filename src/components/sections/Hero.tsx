@@ -89,7 +89,7 @@ function NotificationStack({ started }: { started: boolean }) {
   }, [counter]);
 
   return (
-    <div className="relative mb-4 h-[80px] sm:h-[90px] w-full sm:mx-auto sm:max-w-[420px]">
+    <div className="relative w-full h-[76px] mb-3 sm:h-[90px] sm:mx-auto sm:max-w-[420px] sm:mb-6">
       <AnimatePresence mode="popLayout">
         {visible.map((notifIndex, stackIndex) => {
           const notif = notifications[notifIndex];
@@ -102,16 +102,16 @@ function NotificationStack({ started }: { started: boolean }) {
               initial={{ opacity: 0, y: -20 }}
               animate={{
                 opacity: stackIndex === 0 ? 1 : 0,
-                y: stackIndex * 6,
-                scale: 1 - stackIndex * 0.05,
+                y: 0,
+                scale: 1,
               }}
-              exit={{ opacity: 0, y: 10 }}
+              exit={{ opacity: 0 }}
               transition={{
                 duration: 0.4,
                 ease: "easeOut",
                 layout: { duration: 0.3 },
               }}
-              className={`absolute inset-x-0 rounded-xl sm:rounded-2xl border border-white/15 px-4 py-3.5 sm:px-6 sm:py-4 shadow-2xl shadow-black/30 ${stackIndex === 0 ? "" : "bg-[#2a2a2b]"}`}
+              className={`absolute inset-x-0 rounded-2xl border border-white/15 px-4 py-5 sm:px-6 sm:py-4 shadow-2xl shadow-black/30 ${stackIndex === 0 ? "" : "bg-[#2a2a2b]"}`}
               style={{ zIndex: 10 - stackIndex, willChange: "transform, opacity", ...(stackIndex === 0 ? { background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" } : {}) }}
             >
               <div className="flex items-center gap-3 sm:gap-3.5">
@@ -122,7 +122,7 @@ function NotificationStack({ started }: { started: boolean }) {
                   <Icon size={22} className="hidden sm:block" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm sm:text-[15px] font-semibold text-foreground">
+                  <p className="text-[13px] sm:text-[15px] font-semibold text-foreground">
                     {notif.text}
                   </p>
                   <p className="text-xs sm:text-sm text-muted">{notif.detail}</p>
@@ -136,6 +136,81 @@ function NotificationStack({ started }: { started: boolean }) {
         })}
       </AnimatePresence>
     </div>
+  );
+}
+
+const features = [
+  "Professional sayt",
+  "CRM va ERP tizim",
+  "Google'da birinchi",
+];
+
+const mountTime = typeof window !== "undefined" ? Date.now() : 0;
+
+function HeroFeatures({ show }: { show: boolean }) {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (!show) return;
+    // CSS animatsiya 4s cycle, spin 500ms da boshlanadi
+    const now = Date.now();
+    const elapsed = now - mountTime;
+    const spinTime = 500; // spin boshlanish vaqti (12.5% of 4s)
+    const cycle = 4000;
+    const nextSpin = Math.ceil((elapsed - spinTime) / cycle) * cycle + spinTime;
+    const delay = nextSpin - elapsed;
+
+    const firstTimer = setTimeout(() => {
+      setIndex((prev) => (prev + 1) % features.length);
+      // Keyin har 4s da
+      const interval = setInterval(() => {
+        setIndex((prev) => (prev + 1) % features.length);
+      }, cycle);
+      return () => clearInterval(interval);
+    }, delay);
+
+    return () => clearTimeout(firstTimer);
+  }, [show]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={show ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.6 }}
+      className="flex items-center justify-center"
+    >
+      <div className="relative flex items-center justify-center gap-5">
+        <div className="shrink-0 relative" style={{ width: 45, height: 45 }}>
+          {[0, 0.15, 0.3].map((leftMul, i) => (
+            <div
+              key={i}
+              className={i === 0 ? "dl-nav-back absolute" : i === 1 ? "dl-nav-mid absolute" : "dl-nav-front absolute"}
+              style={{
+                width: 31.5, height: 31.5, borderRadius: 6.75,
+                background: "#f5f5f5",
+                top: "50%", marginTop: -15.75,
+                left: leftMul * 45,
+                opacity: i === 0 ? 0.2 : i === 1 ? 0.5 : 1,
+              }}
+            />
+          ))}
+        </div>
+        <div className="w-[220px] overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={index}
+              initial={{ x: "-100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="block text-2xl font-bold text-foreground whitespace-nowrap"
+            >
+              {features[index]}
+            </motion.span>
+          </AnimatePresence>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -179,16 +254,16 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-[8vh]">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-32 sm:pt-0 pb-[8vh]">
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%" }}>
         <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={50} />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
       </div>
 
-      <div ref={contentRef} className="relative mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 will-change-transform">
+      <div ref={contentRef} className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
         {/* Mobile: bitta parent container — text, cards, buttons */}
-        <div className="md:hidden w-full max-w-full">
+        <div className="md:hidden w-full max-w-full flex flex-col min-h-[calc(100vh-8rem)]">
           {/* Text card */}
           <div className="w-full rounded-2xl border border-white/15 px-4 py-5 overflow-hidden shadow-lg shadow-black/30" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" }}>
             <div style={{ perspective: "1000px" }}>
@@ -224,14 +299,33 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Notification cards + Buttons */}
+          {/* Notification cards */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={showRest ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="mt-4"
+            className="mt-3"
           >
             <NotificationStack started={showRest} />
+          </motion.div>
+
+          {/* Logo + almashuvchi text */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={showRest ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mt-16 flex items-center justify-center"
+          >
+            <HeroFeatures show={showRest} />
+          </motion.div>
+
+          {/* Buttons — pastda */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={showRest ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="mt-16"
+          >
             <div className="flex flex-row gap-3">
               <Button href="/kontakt" variant="outline" size="default" className="flex-1 text-sm !border-white/15 !bg-[rgba(255,255,255,0.1)] !text-white !py-3.5">
                 <Send size={14} className="mr-1.5" />
@@ -302,6 +396,7 @@ export function Hero() {
           </div>
         </div>
       </div>
+
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary to-transparent" />
