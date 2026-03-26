@@ -29,14 +29,18 @@ export const metadata: Metadata = {
     template: "%s | Darslinker Agency",
   },
   description:
-    "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun website yaratish, CRM tizimlar va SEO xizmatlari",
+    "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun website yaratish, CRM/ERP tizimlar va SEO xizmatlari",
   keywords: [
     "ta'lim markazi website",
-    "CRM tizim",
+    "CRM/ERP tizim",
     "SEO xizmati",
     "o'qituvchi website",
     "darslinker",
   ],
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
     type: "website",
     locale: "uz_UZ",
@@ -44,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Darslinker Agency",
     title: "Darslinker Agency — Ta'lim biznesi uchun IT yechimlar",
     description:
-      "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun website yaratish, CRM tizimlar va SEO xizmatlari",
+      "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun website yaratish, CRM/ERP tizimlar va SEO xizmatlari",
   },
 };
 

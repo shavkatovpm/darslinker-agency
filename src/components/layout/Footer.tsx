@@ -13,13 +13,13 @@ const socialLinks = [
 
 const serviceLinks = [
   { label: "Website yaratish", href: "/xizmatlar/website" },
-  { label: "CRM tizim", href: "/xizmatlar/crm" },
+  { label: "CRM/ERP tizim", href: "/xizmatlar/crm" },
   { label: "SEO xizmati", href: "/xizmatlar/seo" },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/50 bg-primary">
+    <footer className="border-t border-border/50 bg-[#000000]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-4">
           {/* Brand */}

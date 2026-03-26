@@ -3,8 +3,8 @@ export const siteConfig = {
   description:
     "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun IT va marketing xizmatlari",
   url: "https://darslinker.agency",
-  phone: "+998 90 123 45 67",
-  telegram: "https://t.me/darslinker",
+  phone: "+998 77 305 47 55",
+  telegram: "https://t.me/DarslinkerAgency",
   instagram: "https://instagram.com/darslinker",
   linkedin: "https://linkedin.com/company/darslinker",
   email: "info@darslinker.agency",
@@ -84,7 +84,7 @@ export const services = [
   },
   {
     slug: "crm",
-    title: "CRM tizim",
+    title: "CRM/ERP tizim",
     shortDesc: "O'quvchi, to'lov, jadval — barchasi bir tizimda",
     heroTitle: "Hali ham Excel yoki daftarda o'quvchi bazasini yuritasizmi?",
     heroDesc:
@@ -96,7 +96,7 @@ export const services = [
       "O'quvchi ketib qolsa — sababini bilmaysiz",
     ],
     solution:
-      "Bizning CRM tizimimiz barcha ma'lumotlarni bir joyga yig'adi. O'quvchi ro'yxati, to'lovlar, jadval, davomat — hammasi bitta platformada.",
+      "Bizning CRM/ERP tizimmiz barcha ma'lumotlarni bir joyga yig'adi. O'quvchi ro'yxati, to'lovlar, jadval, davomat — hammasi bitta platformada.",
     features: [
       {
         title: "O'quvchi bazasi",
@@ -125,7 +125,7 @@ export const services = [
     ],
     faq: [
       {
-        q: "CRM tizimi qancha turadi?",
+        q: "CRM/ERP tizim qancha turadi?",
         a: "Narx o'quvchilar soni va kerakli funksiyalarga bog'liq. Bepul konsultatsiyada aniq narxni aytamiz.",
       },
       {

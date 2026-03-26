@@ -7,7 +7,7 @@ import { stats } from "@/lib/constants";
 
 export function Stats() {
   return (
-    <section className="relative overflow-hidden bg-primary py-20 md:py-24">
+    <section className="relative overflow-hidden py-20 md:py-24">
       {/* Pattern */}
       <div
         className="absolute inset-0 opacity-10"

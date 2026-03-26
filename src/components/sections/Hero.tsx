@@ -167,7 +167,7 @@ export function Hero() {
         const progress = Math.max(0, Math.min(1, -rect.top / sectionHeight));
 
         if (bgRef.current) {
-          bgRef.current.style.transform = `translate3d(0, ${progress * 30}%, 0)`;
+          bgRef.current.style.transform = `translate3d(0, ${progress * 37}%, 0)`;
         }
         if (contentRef.current) {
           contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
@@ -183,11 +183,11 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-primary pt-20 pb-28 sm:pt-28 sm:pb-36 md:pt-36 md:pb-44 lg:pt-44 lg:pb-52">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pb-[8vh]">
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-15%", bottom: "-15%", height: "130%" }}>
         <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={75} />
-        <div className="absolute inset-0 bg-primary/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/85 to-[#232324]" />
       </div>
 
       <div ref={contentRef} className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform">
