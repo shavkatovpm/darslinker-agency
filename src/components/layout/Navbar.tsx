@@ -123,7 +123,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="overflow-hidden border-t border-white/10 bg-primary/70 backdrop-blur-xl md:hidden"
+              className="overflow-hidden border-t border-white/10 bg-primary/50 backdrop-blur-2xl md:hidden"
             >
               <div className="space-y-1 px-4 py-6">
                 {navLinks.map((link) => (
