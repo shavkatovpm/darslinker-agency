@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://darslinker.agency",
   phone: "+998 77 305 47 55",
   telegram: "https://t.me/DarslinkerAgency",
-  instagram: "https://instagram.com/darslinker",
+  instagram: "https://instagram.com/darslinker.agency",
   linkedin: "https://linkedin.com/company/darslinker",
   email: "info@darslinker.agency",
 };
@@ -213,8 +213,8 @@ export const services = [
 ];
 
 export const stats = [
-  { value: "50+", label: "Loyihalar" },
-  { value: "30+", label: "Mamnun mijozlar" },
+  { value: "10+", label: "Loyihalar" },
+  { value: "10+", label: "Mamnun mijozlar" },
   { value: "2+", label: "Yillik tajriba" },
   { value: "24/7", label: "Qo'llab-quvvatlash" },
 ];

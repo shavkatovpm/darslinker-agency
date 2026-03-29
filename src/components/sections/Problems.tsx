@@ -9,9 +9,9 @@ import { AlertTriangle, DollarSign, BarChart3 } from "lucide-react";
 const problems = [
   {
     icon: DollarSign,
-    title: "Reklama pulisiz ketadi",
+    title: "Reklamadan kam natija",
     description:
-      "Yangi o'quvchi topish uchun har oy reklama to'laysiz, lekin natija vaqtinchalik. Pul ketadi, mijoz kelmaydi.",
+      "Yangi o'quvchi topish uchun har oy reklamaga to'laysiz, lekin natija vaqtinchalik. Pul ketadi, mijoz kelmaydi.",
     color: "from-red-500/20 to-red-500/5",
     iconColor: "text-red-400",
     borderColor: "border-red-500/20",

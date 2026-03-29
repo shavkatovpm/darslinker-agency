@@ -51,7 +51,8 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Sahifalar */}
+          {/* Sahifalar + Xizmatlar — mobileda yonma-yon */}
+          <div className="grid grid-cols-2 gap-8 md:contents">
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-foreground">
               Sahifalar
@@ -88,6 +89,7 @@ export function Footer() {
               ))}
             </ul>
           </div>
+          </div>
 
           {/* Kontakt */}
           <div>
@@ -119,6 +121,16 @@ export function Footer() {
                   className="text-sm text-muted transition-colors hover:text-gold"
                 >
                   Telegram
+                </a>
+              </li>
+              <li>
+                <a
+                  href={siteConfig.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted transition-colors hover:text-gold"
+                >
+                  Instagram
                 </a>
               </li>
             </ul>

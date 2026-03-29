@@ -19,8 +19,8 @@ const items = [
   {
     problem: {
       icon: DollarSign,
-      title: "Reklama pulisiz ketadi",
-      desc: "Har oy reklama to'laysiz, lekin natija vaqtinchalik",
+      title: "Reklamadan kam natija",
+      desc: "Har oy reklamaga to'laysiz, lekin natija vaqtinchalik",
     },
     solution: {
       icon: Search,
