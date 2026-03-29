@@ -225,10 +225,9 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
+    if (window.matchMedia("(max-width: 768px)").matches) return;
+
     let rafId = 0;
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    const bgSpeed = isMobile ? 15 : 35;
-    const contentSpeed = isMobile ? 0 : 15;
 
     const handleScroll = () => {
       if (rafId) return;
@@ -241,10 +240,10 @@ export function Hero() {
         const progress = Math.min(y / section.offsetHeight, 1);
 
         if (bgRef.current) {
-          bgRef.current.style.transform = `translate3d(0, ${progress * bgSpeed}%, 0)`;
+          bgRef.current.style.transform = `translate3d(0, ${progress * 35}%, 0)`;
         }
-        if (contentSpeed && contentRef.current) {
-          contentRef.current.style.transform = `translate3d(0, ${progress * contentSpeed}%, 0)`;
+        if (contentRef.current) {
+          contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
         }
       });
     };
