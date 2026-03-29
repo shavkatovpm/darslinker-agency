@@ -215,6 +215,7 @@ export function Hero() {
   const [showRest, setShowRest] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const blobsRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -225,8 +226,7 @@ export function Hero() {
   }, []);
 
   useEffect(() => {
-    if (window.matchMedia("(max-width: 768px)").matches) return;
-
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
     let rafId = 0;
 
     const handleScroll = () => {
@@ -239,11 +239,17 @@ export function Hero() {
         const y = window.scrollY;
         const progress = Math.min(y / section.offsetHeight, 1);
 
-        if (bgRef.current) {
-          bgRef.current.style.transform = `translate3d(0, ${progress * 35}%, 0)`;
+        if (!isMobile) {
+          if (bgRef.current) {
+            bgRef.current.style.transform = `translate3d(0, ${progress * 35}%, 0)`;
+          }
+          if (contentRef.current) {
+            contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
+          }
         }
-        if (contentRef.current) {
-          contentRef.current.style.transform = `translate3d(0, ${progress * 15}%, 0)`;
+
+        if (isMobile && blobsRef.current) {
+          blobsRef.current.style.transform = `translate3d(0, ${progress * 40}%, 0)`;
         }
       });
     };
@@ -256,11 +262,18 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-32 sm:pt-0 pb-[8vh]">
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-32 sm:pt-0 pb-[8vh] md:bg-none">
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-0 md:inset-x-0 md:will-change-transform md:top-[-25%] md:bottom-[-25%] md:h-[150%]">
         <Image src="/hero-bg.jpg" alt="" fill className="hidden md:block object-cover object-center" priority sizes="100vw" quality={50} />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2e3440] via-[#282c32] to-[#232324] md:from-primary/80 md:via-primary/90 md:to-[#232324]" />
+      </div>
+
+      {/* Mobile glow blobs — parallax scroll */}
+      <div ref={blobsRef} className="absolute inset-0 md:hidden overflow-hidden pointer-events-none z-0 will-change-transform" style={{ transition: "transform 0.3s ease-out" }}>
+        <div className="absolute top-[5%] left-[10%] w-[30%] h-[20%] rounded-full bg-blue-500/[0.16] blur-[50px] animate-[blob-blue_32s_ease-in-out_infinite]" />
+        <div className="absolute top-[35%] left-[35%] w-[25%] h-[15%] rounded-full bg-white/10 blur-[50px] animate-[blob-white_36s_ease-in-out_infinite]" />
+        <div className="absolute top-[55%] right-[10%] w-[25%] h-[18%] rounded-full bg-gold/[0.13] blur-[50px] animate-[blob-gold_40s_ease-in-out_infinite]" />
       </div>
 
       <motion.div
