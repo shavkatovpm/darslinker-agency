@@ -258,7 +258,7 @@ export function Hero() {
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-start sm:justify-center overflow-hidden pt-32 sm:pt-0 pb-[8vh]">
       {/* Background image — parallax */}
-      <div ref={bgRef} className="absolute inset-x-0 will-change-transform" style={{ top: "-25%", bottom: "-25%", height: "150%" }}>
+      <div ref={bgRef} className="absolute inset-0 md:inset-x-0 md:will-change-transform md:top-[-25%] md:bottom-[-25%] md:h-[150%]">
         <Image src="/hero-bg.jpg" alt="" fill className="object-cover object-center" priority sizes="100vw" quality={50} />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/90 to-[#232324]" />
       </div>
