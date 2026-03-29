@@ -284,7 +284,7 @@ export function Hero() {
         className="relative w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 will-change-transform"
       >
         {/* Mobile: bitta parent container — text, cards, buttons */}
-        <div className="md:hidden w-full max-w-full flex flex-col min-h-[calc(100vh-8rem)]">
+        <div className="md:hidden w-full max-w-full flex flex-col">
           {/* Text card */}
           <div className="w-full rounded-2xl border border-white/15 px-4 py-5 overflow-hidden shadow-lg shadow-black/30" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.08) 100%)" }}>
             <motion.h1
