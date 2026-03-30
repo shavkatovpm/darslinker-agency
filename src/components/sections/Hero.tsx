@@ -262,7 +262,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-32 sm:py-40 md:py-48 lg:py-56">
+    <section ref={sectionRef} className="relative overflow-hidden pt-20 pb-32 sm:py-40 md:py-48 lg:py-56">
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-0 md:inset-x-0 md:will-change-transform md:top-[-25%] md:bottom-[-25%] md:h-[150%]">
         <Image src="/hero-bg.jpg" alt="" fill className="hidden md:block object-cover object-center" priority sizes="100vw" quality={50} />
