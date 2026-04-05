@@ -79,7 +79,57 @@ function renderMarkdown(content: string) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (line.startsWith("### ")) {
+    // Jadval (table) — "|" bilan boshlanadigan qatorlar
+    if (line.trim().startsWith("|")) {
+      flushList();
+      const tableRows: string[][] = [];
+      let j = i;
+      while (j < lines.length && lines[j].trim().startsWith("|")) {
+        const row = lines[j]
+          .trim()
+          .replace(/^\|/, "")
+          .replace(/\|$/, "")
+          .split("|")
+          .map((cell) => cell.trim());
+        // Separator qatorni o'tkazib yuborish (|---|---|)
+        if (!/^[-:\s|]+$/.test(lines[j].replace(/\|/g, "").trim())) {
+          tableRows.push(row);
+        }
+        j++;
+      }
+      i = j - 1;
+
+      if (tableRows.length > 0) {
+        const header = tableRows[0];
+        const body = tableRows.slice(1);
+        elements.push(
+          <div key={`table-${i}`} className="my-8 overflow-x-auto rounded-xl border border-border/50">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border/50 bg-white/[0.03]">
+                  {header.map((cell, ci) => (
+                    <th key={ci} className="px-4 py-3 text-left font-semibold text-foreground">
+                      {processInline(cell)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {body.map((row, ri) => (
+                  <tr key={ri} className="border-b border-border/30 last:border-0">
+                    {row.map((cell, ci) => (
+                      <td key={ci} className="px-4 py-3 text-muted">
+                        {processInline(cell)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+    } else if (line.startsWith("### ")) {
       flushList();
       elements.push(
         <h3
