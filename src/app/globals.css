@@ -76,13 +76,6 @@ html {
   color: #232324;
 }
 
-/* Page loading — SSR da footer ko'rinmasligi uchun */
-.page-loading {
-  visibility: hidden;
-}
-.page-ready {
-  visibility: visible;
-}
 
 /* Navbar logo animation */
 @keyframes dl-nav-f {

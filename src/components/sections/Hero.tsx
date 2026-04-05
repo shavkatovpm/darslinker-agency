@@ -265,7 +265,7 @@ export function Hero() {
     <section ref={sectionRef} className="relative overflow-hidden pt-20 pb-32 sm:py-40 md:py-48 lg:py-56">
       {/* Background image — parallax */}
       <div ref={bgRef} className="absolute inset-0 md:inset-x-0 md:will-change-transform md:top-[-25%] md:bottom-[-25%] md:h-[150%]">
-        <Image src="/hero-bg.jpg" alt="" fill className="hidden md:block object-cover object-center" priority sizes="100vw" quality={50} />
+        <Image src="/hero-bg.jpg" alt="Darslinker Agency — ta'lim markazlari uchun IT yechimlar" fill className="hidden md:block object-cover object-center" priority sizes="100vw" quality={50} />
         <div className="absolute inset-0 bg-gradient-to-b from-[#2e3440] via-[#282c32] to-[#232324] md:from-primary/80 md:via-primary/90 md:to-[#232324]" />
       </div>
 

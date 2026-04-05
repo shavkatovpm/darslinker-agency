@@ -1,0 +1,77 @@
+# Darslinker Agency — To'liq ma'lumot
+
+> O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun IT va marketing yechimlari
+
+## Kompaniya haqida
+
+Darslinker Agency — O'zbekistonda ta'lim sektoriga ixtisoslashgan IT va marketing agentligi. Biz ta'lim markazlari, xususiy o'qituvchilar, online kurs yaratuvchilar va repetitorlarga professional IT xizmatlari taqdim etamiz. Maqsadimiz — ta'lim bizneslarining online ko'rinishini kuchaytirish, ichki jarayonlarni avtomatlashtirish va doimiy mijoz oqimini ta'minlash.
+
+## Xizmatlar
+
+### 1. Website ishlab chiqish
+Ta'lim markazlari uchun zamonaviy, tez va konversiyaga yo'naltirilgan website yaratamiz.
+
+**Nimalar kiradi:**
+- Mobile-first responsive dizayn — barcha qurilmalarda mukammal ko'rinish
+- 1 soniyadan kam yuklash vaqti — tezkor ishlash
+- SEO optimizatsiya — Google'da yuqori o'rinlarga chiqish
+- Konversiya fokus — har sahifa mijoz olishga yo'naltirilgan
+- Admin panel — kontentni mustaqil boshqarish
+- Analitika — tashriflar va konversiyalarni kuzatish
+
+**Ko'p so'raladigan savollar:**
+- Landing page 5-7 kunda, ko'p sahifali website 2-3 haftada tayyor bo'ladi
+- Narx loyihaning murakkabligiga bog'liq, bepul konsultatsiya orqali aniqlanadi
+- Admin panel bilan birga taqdim etiladi
+- Domen va hosting sozlashda to'liq yordam beriladi
+- Website kengaytiriladigan arxitekturada quriladi
+
+### 2. CRM/ERP tizim
+Ta'lim markazlari uchun barcha ma'lumotlarni bitta tizimga yig'adigan platforma.
+
+**Nimalar kiradi:**
+- O'quvchi bazasi — barcha o'quvchilar bir joyda, izlash oson
+- To'lov kuzatuv — avtomatik eslatmalar va to'lov tarixi
+- Jadval boshqaruvi — dars vaqtlari va xonalar boshqaruvi
+- Davomat tizimi — QR-kod yoki bir tugma bilan davomat
+- Hisobotlar — moliyaviy va o'quv hisobotlari
+- Telegram bildirishnoma — muhim hodisalar haqida xabar
+
+**Ko'p so'raladigan savollar:**
+- Narx o'quvchilar soni va funksiyalarga bog'liq
+- Excel va boshqa formatlardan import qilish mumkin
+- Mobil telefon, planshet va kompyuterda ishlaydi
+- Ma'lumotlar shifrlangan serverda saqlanadi
+- Cheklovsiz foydalanuvchilar bir vaqtda ishlashi mumkin
+
+### 3. SEO xizmati
+Google'dan doimiy, bepul mijoz oqimi yaratish.
+
+**Nimalar kiradi:**
+- Kalit so'z tahlili — maqsadli auditoriya izlaydigan so'zlar
+- Texnik SEO — sayt tezligi, struktura, indexlash
+- Kontent strategiya — SEO-optimallashtirilgan blog maqolalari
+- Local SEO — Google Maps va mahalliy qidiruvda ko'rinish
+- Backlink building — sifatli tashqi havolalar olish
+- Oylik hisobot — natijalar va o'sish ko'rsatkichlari
+
+**Ko'p so'raladigan savollar:**
+- Dastlabki natijalar 2-3 oyda, to'liq effekt 4-6 oyda ko'rinadi
+- SEO bir marta investitsiya — uzoq muddatda doimiy bepul trafik beradi
+- Kalit so'zlar soha va joylashuvga mos tahlil qilinadi
+- Bepul audit orqali aniq taklif tayyorlanadi
+
+## Aloqa ma'lumotlari
+
+- Website: https://darslinker.agency
+- Telegram: https://t.me/DarslinkerAgency
+- Instagram: https://instagram.com/darslinker.agency
+- LinkedIn: https://linkedin.com/company/darslinker
+- Telefon: +998 77 305 47 55
+- Email: info@darslinker.agency
+
+## Foydali havolalar
+
+- Blog: https://darslinker.agency/blog
+- RSS: https://darslinker.agency/feed.xml
+- Aloqa sahifasi: https://darslinker.agency/contact

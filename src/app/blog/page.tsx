@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Ta'lim biznesi uchun foydali maqolalar: website, CRM, SEO va marketing bo'yicha maslahatlar",
+  openGraph: {
+    title: "Blog — Darslinker Agency",
+    description:
+      "Ta'lim biznesi uchun foydali maqolalar: website, CRM, SEO va marketing bo'yicha maslahatlar",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Darslinker Agency",
+    description:
+      "Ta'lim biznesi uchun foydali maqolalar: website, CRM, SEO va marketing bo'yicha maslahatlar",
+  },
+  alternates: {
+    canonical: "https://darslinker.agency/blog",
+  },
 };
 
 export default function BlogPage() {

@@ -1,0 +1,28 @@
+# Darslinker Agency
+
+> Ta'lim markazlari va xususiy o'qituvchilar uchun IT va marketing yechimlari
+
+## Biz haqimizda
+
+Darslinker Agency — O'zbekistondagi ta'lim bizneslari uchun ixtisoslashgan IT agentlik. Biz ta'lim markazlari, xususiy o'qituvchilar va kurs yaratuvchilarga professional website, CRM/ERP tizimlar va SEO xizmatlari taqdim etamiz.
+
+## Xizmatlar
+
+- **Website ishlab chiqish**: Zamonaviy, tez va SEO-optimallashtirilgan website yaratish. Mobile-first dizayn, admin panel va analitika bilan.
+- **CRM/ERP tizim**: O'quvchi bazasi, to'lov kuzatuv, jadval boshqaruvi, davomat tizimi — barchasi bitta platformada.
+- **SEO xizmati**: Google'da yuqori o'rinlarga chiqish. Kalit so'z tahlili, texnik SEO, kontent strategiya va backlink building.
+
+## Aloqa
+
+- Website: https://darslinker.agency
+- Telegram: https://t.me/DarslinkerAgency
+- Instagram: https://instagram.com/darslinker.agency
+- Telefon: +998 77 305 47 55
+- Email: info@darslinker.agency
+
+## Blog
+
+Biz ta'lim biznesi uchun foydali maqolalar yozamiz: website yaratish, CRM tizimlar, SEO strategiyalar va digital marketing bo'yicha.
+
+Blog: https://darslinker.agency/blog
+RSS: https://darslinker.agency/feed.xml

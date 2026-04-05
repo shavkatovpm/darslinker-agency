@@ -12,7 +12,6 @@ export const siteConfig = {
 
 export const navLinks = [
   { label: "Xizmatlar", href: "/#services" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Aloqa", href: "/contact" },
   { label: "Blog", href: "/blog" },
 ];
@@ -219,35 +218,3 @@ export const stats = [
   { value: "24/7", label: "Qo'llab-quvvatlash" },
 ];
 
-export const portfolioItems = [
-  {
-    name: "EduCenter",
-    logo: "/portfolio/educenter.svg",
-    url: "#",
-  },
-  {
-    name: "MasterClass UZ",
-    logo: "/portfolio/masterclass.svg",
-    url: "#",
-  },
-  {
-    name: "SmartEdu",
-    logo: "/portfolio/smartedu.svg",
-    url: "#",
-  },
-  {
-    name: "TutorPro",
-    logo: "/portfolio/tutorpro.svg",
-    url: "#",
-  },
-  {
-    name: "LinguaHub",
-    logo: "/portfolio/linguahub.svg",
-    url: "#",
-  },
-  {
-    name: "MathGenius",
-    logo: "/portfolio/mathgenius.svg",
-    url: "#",
-  },
-];
