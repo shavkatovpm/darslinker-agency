@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID!;
+const SHEETS_URL = process.env.GOOGLE_SHEETS_URL!;
 
 export async function POST(req: NextRequest) {
   try {
@@ -32,21 +33,21 @@ export async function POST(req: NextRequest) {
       .filter(Boolean)
       .join("\n");
 
-    const res = await fetch(
-      `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
-      {
+    const [telegramRes] = await Promise.all([
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text,
-          parse_mode: "HTML",
-        }),
-      }
-    );
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: "HTML" }),
+      }),
+      fetch(SHEETS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone: `998${phone.replace(/\s/g, "")}`, center, service: serviceLabels[service] || service, message }),
+      }).catch((err) => console.error("Google Sheets error:", err)),
+    ]);
 
-    if (!res.ok) {
-      const err = await res.text();
+    if (!telegramRes.ok) {
+      const err = await telegramRes.text();
       console.error("Telegram API error:", err);
       return NextResponse.json({ error: "Xabar yuborilmadi" }, { status: 500 });
     }

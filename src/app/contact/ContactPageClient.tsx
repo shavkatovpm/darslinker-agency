@@ -21,9 +21,37 @@ export function ContactPageClient() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setLoading(false);
-    setSubmitted(true);
+
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      center: (form.elements.namedItem("center") as HTMLInputElement).value,
+      service: (form.elements.namedItem("service") as HTMLSelectElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+      hp: (form.elements.namedItem("_hp_field") as HTMLInputElement).value,
+    };
+
+    if (data.hp) {
+      setLoading(false);
+      setSubmitted(true);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error();
+      setSubmitted(true);
+    } catch {
+      alert("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -200,8 +228,8 @@ export function ContactPageClient() {
                   />
                 </motion.div>
 
-                <div className="hidden">
-                  <input type="text" name="website" tabIndex={-1} />
+                <div className="hidden" aria-hidden="true">
+                  <input type="text" name="_hp_field" tabIndex={-1} autoComplete="off" />
                 </div>
 
                 <motion.div variants={fadeInUp}>
