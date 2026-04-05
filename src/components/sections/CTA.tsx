@@ -29,11 +29,11 @@ export function CTA() {
       center: (form.elements.namedItem("center") as HTMLInputElement).value,
       service: (form.elements.namedItem("service") as HTMLSelectElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-      website: (form.elements.namedItem("website") as HTMLInputElement).value,
+      hp: (form.elements.namedItem("_hp_field") as HTMLInputElement).value,
     };
 
     // Honeypot — bot aniqlash
-    if (data.website) {
+    if (data.hp) {
       setLoading(false);
       setSubmitted(true);
       return;
@@ -233,8 +233,8 @@ export function CTA() {
                 </motion.div>
 
                 {/* Honeypot */}
-                <div className="hidden">
-                  <input type="text" name="website" tabIndex={-1} />
+                <div className="hidden" aria-hidden="true">
+                  <input type="text" name="_hp_field" tabIndex={-1} autoComplete="off" />
                 </div>
 
                 <motion.div variants={fadeInUp}>
