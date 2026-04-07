@@ -24,6 +24,7 @@ type Service = {
   problems: string[];
   solution: string;
   features: { title: string; desc: string }[];
+  sections?: { title: string; body: string; link?: { text: string; href: string } }[];
   faq: { q: string; a: string }[];
 };
 
@@ -188,6 +189,39 @@ export function ServicePageClient({ service }: { service: Service }) {
           ))}
         </div>
       </SectionWrapper>
+
+      {/* Long content sections */}
+      {service.sections && service.sections.length > 0 && (
+        <SectionWrapper>
+          <div className="mx-auto max-w-3xl space-y-16">
+            {service.sections.map((section, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <h2 className="mb-5 text-2xl font-bold text-foreground sm:text-3xl">
+                  {section.title}
+                </h2>
+                <p className="text-base leading-relaxed text-muted">
+                  {section.body}
+                </p>
+                {section.link && (
+                  <a
+                    href={section.link.href}
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold/80"
+                  >
+                    {section.link.text}
+                    <ArrowRight size={14} />
+                  </a>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* Process */}
       <SectionWrapper dark>
