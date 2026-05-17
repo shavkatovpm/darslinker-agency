@@ -168,7 +168,7 @@ export function ContactPageClient() {
                       name="phone"
                       required
                       maxLength={12}
-                      placeholder="77 305 47 55"
+                      placeholder="77 488 82 80"
                       onInput={(e) => {
                         const input = e.currentTarget;
                         let val = input.value.replace(/\D/g, "");
