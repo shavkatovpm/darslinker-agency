@@ -12,6 +12,7 @@ export type BlogPost = {
   readTime: string;
   category: string;
   content: string;
+  faq?: { q: string; a: string }[];
 };
 
 export function getAllPosts(): BlogPost[] {
@@ -33,6 +34,7 @@ export function getAllPosts(): BlogPost[] {
       readTime: data.readTime || "5 daqiqa",
       category: data.category || "Umumiy",
       content,
+      faq: Array.isArray(data.faq) ? data.faq : undefined,
     };
   });
 

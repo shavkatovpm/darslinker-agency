@@ -77,6 +77,22 @@ export default async function BlogPostPage({ params }: Props) {
     ],
   };
 
+  const faqSchema =
+    post.faq && post.faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: post.faq.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.a,
+            },
+          })),
+        }
+      : null;
+
   return (
     <>
       <script
@@ -87,6 +103,12 @@ export default async function BlogPostPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
       <BlogPostClient post={post} />
     </>
   );

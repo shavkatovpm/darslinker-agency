@@ -24,6 +24,58 @@ export const services = [
     heroTitle: "Ta'lim markazingizning websitesi yo'qmi yoki eskirganmi?",
     heroDesc:
       "Zamonaviy, tez va mobil-qulay website bilan mijozlar sizni topadi va ishonadi.",
+    summary:
+      "Ta'lim markazlari va o'qituvchilar uchun konversiyaga yo'naltirilgan website 5-7 kunda (oddiy landing) yoki 2-3 haftada (ko'p sahifali) tayyor bo'ladi. Mobile-first dizayn, 1 soniyadan kam yuklash, asosiy SEO va admin panel — barchasi narxga kirgan. Domen va hosting sozlashda ham to'liq yordam beramiz.",
+    audiences: [
+      "Yangi ochilgan o'quv markaz — sayti yo'q, lekin onlayn mijoz oqimi kerak",
+      "Eski saytli markaz — mobil qurilmalarda noto'g'ri ko'rinadi yoki sekin yuklanadi",
+      "Xususiy repetitor / o'qituvchi — shaxsiy brend va onlayn ko'rinish yaratish",
+      "Onlayn kurs platforma — professional ko'rinish va konversiya optimallash",
+    ],
+    packages: [
+      {
+        name: "Light",
+        priceLabel: "$250'dan",
+        priceValue: 250,
+        priceUnit: "one-time" as const,
+        features: [
+          "1 sahifa landing",
+          "Asosiy SEO optimizatsiya",
+          "Admin panel",
+          "Mobile-first dizayn",
+          "Form integratsiya",
+        ],
+      },
+      {
+        name: "Standart",
+        priceLabel: "$650'dan",
+        priceValue: 650,
+        priceUnit: "one-time" as const,
+        highlighted: true,
+        features: [
+          "5-7 sahifa",
+          "Tayyor CMS",
+          "Google Analytics",
+          "SEO optimizatsiya",
+          "Form + Telegram bot",
+          "Domen + hosting yordami",
+        ],
+      },
+      {
+        name: "Pro",
+        priceLabel: "$1500'dan",
+        priceValue: 1500,
+        priceUnit: "one-time" as const,
+        features: [
+          "Ko'p tilli (uz/ru/en)",
+          "Custom dizayn",
+          "CRM integratsiya",
+          "Premium SEO",
+          "Blog tizimi",
+          "1 yil texnik support",
+        ],
+      },
+    ],
     problems: [
       "Websitengiz yo'q — potensial mijozlar sizni topa olmaydi",
       "Eskirgan dizayn — tashrif buyuruvchilar ishonch bildirmaydi",
@@ -111,6 +163,59 @@ export const services = [
     heroTitle: "Hali ham Excel yoki daftarda o'quvchi bazasini yuritasizmi?",
     heroDesc:
       "Barcha ma'lumotlarni bitta tizimga yig'ing. Vaqtingizni tejang, xatolarni kamaytiring.",
+    summary:
+      "O'quv markaz uchun individual CRM/ERP tizim: o'quvchi bazasi, to'lov kuzatuv, jadval, davomat va Telegram bot orqali avtomatik ota-ona bildirishnomalari — bitta panelda. Excel'dan ko'chirish 1-2 hafta ichida tugaydi, ma'lumotlar yo'qolmaydi. Telefon, planshet va kompyuterda ishlaydi, bir nechta foydalanuvchi bir vaqtda ishlay oladi.",
+    audiences: [
+      "50+ o'quvchili markaz — Excel va daftarda yuritish murakkablashgan",
+      "Bir nechta filiali markaz — markazlashgan boshqaruv va hisobot kerak",
+      "Admin ishini avtomatlashtirmoqchi markaz — to'lov, davomat, eslatma",
+      "Yangi ochilgan markaz — boshidanoq tartibli tizim qurmoqchi",
+    ],
+    packages: [
+      {
+        name: "Boshlang'ich",
+        priceLabel: "$650'dan",
+        priceValue: 650,
+        priceUnit: "one-time" as const,
+        features: [
+          "Cheksiz o'quvchi va guruh",
+          "O'quvchi bazasi",
+          "To'lov kuzatuv",
+          "Jadval boshqaruvi",
+          "Asosiy hisobotlar",
+          "2 ta admin foydalanuvchi",
+        ],
+      },
+      {
+        name: "O'rta",
+        priceLabel: "$1500'dan",
+        priceValue: 1500,
+        priceUnit: "one-time" as const,
+        highlighted: true,
+        features: [
+          "Boshlang'ichdagi barcha imkoniyatlar",
+          "Davomat tizimi (QR-kod)",
+          "Telegram bot eslatma",
+          "Kengaytirilgan hisobotlar",
+          "Excel import/export",
+          "5 ta admin foydalanuvchi",
+        ],
+      },
+      {
+        name: "Pro",
+        priceLabel: "$3000'dan",
+        priceValue: 3000,
+        priceUnit: "one-time" as const,
+        features: [
+          "O'rtadagi barcha imkoniyatlar",
+          "Custom modullar",
+          "Ko'p filial boshqaruvi",
+          "API integratsiya",
+          "Brend identifikatsiya",
+          "Cheksiz admin + 1 yil support",
+        ],
+      },
+    ],
     problems: [
       "O'quvchilar ro'yxati Excel, daftar va telefonlar orasida tarqoq",
       "To'lovlarni kuzatish qiyin — kim to'lagan, kim to'lamagan",
@@ -198,6 +303,57 @@ export const services = [
     heroTitle: "Reklama to'xtasa, mijozlar ham to'xtaydimi?",
     heroDesc:
       "SEO bilan Google'dan doimiy, bepul mijoz oqimi yarating. Reklama budjetini kamaytiring.",
+    summary:
+      "Ta'lim markazi sayti uchun Google SEO: kalit so'z tahlili, texnik optimizatsiya, kontent strategiya, local SEO (Google Maps) va backlink. Dastlabki natijalar 2-3 oy, barqaror o'sish 4-6 oy ichida ko'rinadi. Reklamadan farqli — bir marta investitsiya, doimiy bepul organik trafik. Har oy shaffof hisobot beriladi.",
+    audiences: [
+      "Sayti bor, lekin Google'dan organik trafik kelmayotgan markaz",
+      "Reklamaga ko'p sarflayotgan — organik kanal yaratmoqchi bo'lganlar",
+      "Yangi shahar yoki hudud'ga kengaymoqchi bo'lgan markaz",
+      "Onlayn kurs platforma — long-tail va niche keyword'larda topilish",
+    ],
+    packages: [
+      {
+        name: "Boshlang'ich",
+        priceLabel: "$250/oy",
+        priceValue: 250,
+        priceUnit: "monthly" as const,
+        features: [
+          "Boshlash audit + kalit so'z tahlili",
+          "Kamida 4 ta SEO kontent/oy",
+          "On-page texnik optimizatsiya",
+          "Google Search Console sozlash",
+          "Oylik o'sish hisoboti",
+        ],
+      },
+      {
+        name: "Basic",
+        priceLabel: "$500/oy",
+        priceValue: 500,
+        priceUnit: "monthly" as const,
+        highlighted: true,
+        features: [
+          "Boshlang'ichdagi barcha imkoniyatlar",
+          "Kamida 8 ta SEO kontent/oy",
+          "Local SEO (Google Maps optimallash)",
+          "Konkurent tahlili",
+          "Schema markup + AEO optimallash",
+        ],
+      },
+      {
+        name: "Pro",
+        priceLabel: "$1000/oy",
+        priceValue: 1000,
+        priceUnit: "monthly" as const,
+        features: [
+          "Basic'dagi barcha imkoniyatlar",
+          "Kamida 16 ta SEO kontent/oy",
+          "Backlink building strategiya",
+          "Multi-region SEO",
+          "Konversiya optimallash (CRO)",
+          "Bag'ishlangan SEO mutaxassis",
+        ],
+      },
+    ],
     problems: [
       "Google'da qidirsangiz, raqobatchilar birinchi chiqadi",
       "Faqat reklamaga bog'liksiz — to'lov to'xtasa, mijoz ham to'xtaydi",

@@ -65,6 +65,25 @@ export default async function ServicePage({ params }: Props) {
       url: "https://darslinker.agency",
     },
     url: `https://darslinker.agency/services/${slug}`,
+    ...(service.packages && service.packages.length > 0
+      ? {
+          offers: service.packages.map((pkg) => ({
+            "@type": "Offer",
+            name: pkg.name,
+            price: pkg.priceValue,
+            priceCurrency: "USD",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              price: pkg.priceValue,
+              priceCurrency: "USD",
+              unitText: pkg.priceUnit === "monthly" ? "MONTH" : "ONE_TIME",
+            },
+            description: pkg.features.join("; "),
+            availability: "https://schema.org/InStock",
+            url: `https://darslinker.agency/services/${slug}`,
+          })),
+        }
+      : {}),
   };
 
   const breadcrumbSchema = {
@@ -74,6 +93,33 @@ export default async function ServicePage({ params }: Props) {
       { "@type": "ListItem", position: 1, name: "Bosh sahifa", item: "https://darslinker.agency" },
       { "@type": "ListItem", position: 2, name: "Xizmatlar", item: "https://darslinker.agency/#services" },
       { "@type": "ListItem", position: 3, name: service.title, item: `https://darslinker.agency/services/${slug}` },
+    ],
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `${service.title} — Darslinker Agency bilan ishlash jarayoni`,
+    description: service.heroDesc,
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Bog'laning",
+        text: "Bepul konsultatsiya orqali ehtiyojlaringizni muhokama qilamiz va aniq taklif tayyorlaymiz.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Biz ishlaymiz",
+        text: "Darslinker Agency jamoasi loyihangizni professional darajada amalga oshiradi — har bir bosqichda siz bilan aloqada bo'lamiz.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Natija oling",
+        text: "Tayyor mahsulotni siz qabul qilasiz va to'liq qo'llab-quvvatlash bilan ishga tushiramiz.",
+      },
     ],
   };
 
@@ -90,6 +136,10 @@ export default async function ServicePage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
       <ServicePageClient service={service} />
     </>

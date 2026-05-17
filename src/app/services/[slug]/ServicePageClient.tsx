@@ -14,13 +14,27 @@ import {
   Shield,
   Clock,
   Zap,
+  Quote,
+  Target,
 } from "lucide-react";
+
+type Package = {
+  name: string;
+  priceLabel: string;
+  priceValue: number;
+  priceUnit: "one-time" | "monthly";
+  highlighted?: boolean;
+  features: string[];
+};
 
 type Service = {
   slug: string;
   title: string;
   heroTitle: string;
   heroDesc: string;
+  summary?: string;
+  audiences?: string[];
+  packages?: Package[];
   problems: string[];
   solution: string;
   features: { title: string; desc: string }[];
@@ -96,6 +110,40 @@ export function ServicePageClient({ service }: { service: Service }) {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* AEO Summary block — quotable answer for AI engines */}
+      {service.summary && (
+        <section className="bg-primary pb-12 md:pb-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
+              className="rounded-2xl border border-border/30 border-l-4 border-l-gold bg-card/40 p-6 sm:p-8"
+            >
+              <div className="mb-3 flex items-center gap-2 text-gold">
+                <Quote size={16} />
+                <span className="text-xs font-semibold uppercase tracking-wider">
+                  Qisqacha
+                </span>
+              </div>
+              <p className="text-base leading-relaxed text-foreground/85">
+                {service.summary}
+              </p>
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-muted">
+                  Sizning loyihangiz uchun aniq narx va vaqtni bilmoqchimisiz?
+                </p>
+                <Button href="/contact" size="md" className="shrink-0">
+                  Bepul konsultatsiya
+                  <ArrowRight size={16} className="ml-2" />
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Problems */}
       <SectionWrapper dark>
@@ -223,6 +271,69 @@ export function ServicePageClient({ service }: { service: Service }) {
         </SectionWrapper>
       )}
 
+      {/* Pricing packages */}
+      {service.packages && service.packages.length > 0 && (
+        <SectionWrapper>
+          <SectionHeading
+            title="Narx va paketlar"
+            subtitle="Aniq narx loyiha hajmiga qarab — bepul konsultatsiyada belgilanadi"
+            light
+          />
+          <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3">
+            {service.packages.map((pkg, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className={`relative flex flex-col rounded-2xl border p-6 transition-all duration-300 sm:p-8 ${
+                  pkg.highlighted
+                    ? "border-gold/40 bg-gold/[0.03] shadow-lg shadow-gold/5"
+                    : "border-border/40 bg-card/40 hover:border-gold/20"
+                }`}
+              >
+                {pkg.highlighted && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gold px-3 py-1 text-xs font-bold text-primary">
+                    Eng mashhur
+                  </div>
+                )}
+                <h3 className="text-xl font-bold text-foreground">{pkg.name}</h3>
+                <div className="mt-3 flex items-baseline gap-1">
+                  <span className="text-3xl font-extrabold text-gold">
+                    {pkg.priceLabel}
+                  </span>
+                </div>
+                <p className="mt-1 text-xs uppercase tracking-wider text-muted">
+                  {pkg.priceUnit === "monthly" ? "Oylik to'lov" : "1 martalik to'lov"}
+                </p>
+                <ul className="mt-6 flex-1 space-y-3">
+                  {pkg.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm text-foreground/85">
+                      <CheckCircle2
+                        size={16}
+                        className="mt-0.5 shrink-0 text-gold"
+                      />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  href="/contact"
+                  size="md"
+                  className={`mt-8 w-full justify-center ${
+                    pkg.highlighted ? "" : "!bg-card !text-foreground hover:!bg-card/70 border border-border/40"
+                  }`}
+                >
+                  Bepul konsultatsiya
+                  <ArrowRight size={16} className="ml-2" />
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+        </SectionWrapper>
+      )}
+
       {/* Process */}
       <SectionWrapper dark>
         <SectionHeading
@@ -300,6 +411,35 @@ export function ServicePageClient({ service }: { service: Service }) {
           </motion.div>
         </motion.div>
       </section>
+
+      {/* Kim uchun mos? */}
+      {service.audiences && service.audiences.length > 0 && (
+        <SectionWrapper dark>
+          <SectionHeading
+            title="Kim uchun mos?"
+            subtitle="Bu xizmat aynan shu vaziyatlarga eng yaxshi yechim"
+          />
+          <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
+            {service.audiences.map((audience, index) => (
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="flex items-start gap-4 rounded-2xl border border-border/40 bg-card/40 p-5 transition-all duration-300 hover:border-gold/30"
+              >
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold">
+                  <Target size={16} />
+                </div>
+                <p className="text-sm leading-relaxed text-foreground/85">
+                  {audience}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* FAQ */}
       <SectionWrapper>

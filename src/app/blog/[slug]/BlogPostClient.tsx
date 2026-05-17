@@ -160,6 +160,43 @@ function renderMarkdown(content: string) {
       elements.push(
         <hr key={i} className="my-10 border-border/50" />
       );
+    } else if (line.startsWith("> ")) {
+      // Blockquote — AEO TL;DR / callout block + CTA
+      flushList();
+      const quoteLines: string[] = [];
+      let j = i;
+      while (j < lines.length && lines[j].startsWith("> ")) {
+        quoteLines.push(lines[j].slice(2));
+        j++;
+      }
+      i = j - 1;
+      elements.push(
+        <div
+          key={`quote-${i}`}
+          className="my-8 rounded-2xl border border-border/40 border-l-4 border-l-gold bg-card/40 p-5 sm:p-6"
+        >
+          {quoteLines.map((qline, qi) => (
+            <p
+              key={qi}
+              className="my-2 text-base leading-relaxed text-foreground/90 first:mt-0 last:mb-0"
+            >
+              {processInline(qline)}
+            </p>
+          ))}
+          <div className="mt-5 flex flex-col gap-3 border-t border-border/30 pt-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted">
+              Sizning vaziyatingiz uchun aniq yechim kerakmi?
+            </p>
+            <Link
+              href="/contact"
+              className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-primary transition-all hover:bg-gold/90"
+            >
+              Bepul konsultatsiya
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      );
     } else if (line.trim() === "") {
       flushList();
     } else {
