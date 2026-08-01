@@ -135,7 +135,7 @@ export function ServicePageClient({ service }: { service: Service }) {
                 <p className="text-sm text-muted">
                   Sizning loyihangiz uchun aniq narx va vaqtni bilmoqchimisiz?
                 </p>
-                <Button href="/contact" size="md" className="shrink-0">
+                <Button href="/contact" size="default" className="shrink-0">
                   Bepul konsultatsiya
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
@@ -320,7 +320,7 @@ export function ServicePageClient({ service }: { service: Service }) {
                 </ul>
                 <Button
                   href="/contact"
-                  size="md"
+                  size="default"
                   className={`mt-8 w-full justify-center ${
                     pkg.highlighted ? "" : "!bg-card !text-foreground hover:!bg-card/70 border border-border/40"
                   }`}
