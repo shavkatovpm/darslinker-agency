@@ -171,7 +171,7 @@ export function CTA() {
                       name="phone"
                       required
                       maxLength={12}
-                      placeholder="77 488 82 80"
+                      placeholder="95 800 59 99"
                       onInput={(e) => {
                         const input = e.currentTarget;
                         let val = input.value.replace(/\D/g, "");

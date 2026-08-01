@@ -3,7 +3,7 @@ export const siteConfig = {
   description:
     "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun IT va marketing xizmatlari",
   url: "https://darslinker.agency",
-  phone: "+998 77 488 82 80",
+  phone: "+998 95 800 59 99",
   telegram: "https://t.me/DarslinkerAgency",
   instagram: "https://instagram.com/darslinker.agency",
   linkedin: "https://linkedin.com/company/darslinker",

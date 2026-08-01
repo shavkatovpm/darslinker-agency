@@ -89,7 +89,7 @@ export default function RootLayout({
                 "O'zbekistondagi ta'lim markazlari va xususiy o'qituvchilar uchun IT va marketing xizmatlari",
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+998-77-488-82-80",
+                telephone: "+998-95-800-59-99",
                 contactType: "customer service",
                 availableLanguage: ["uz", "ru"],
               },

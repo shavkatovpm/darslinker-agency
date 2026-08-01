@@ -11,8 +11,8 @@ import {
 } from "@/lib/formQuestions";
 import { siteConfig } from "@/lib/constants";
 
-/** Forma orqali kelgan mijozlar uchun alohida raqam (Telegram Ads oqimi) */
-const formPhone = "+998 95 800 59 99";
+/** Forma to'ldirgan mijozlar bevosita support bilan yozishadi (kanal emas) */
+const supportTelegram = "https://t.me/darslinker_support";
 
 export function FormClient() {
   const [step, setStep] = useState(0);
@@ -164,20 +164,20 @@ export function FormClient() {
             </p>
             <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center">
               <a
-                href={siteConfig.telegram}
+                href={supportTelegram}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3 text-sm text-muted transition-all duration-300 hover:border-gold/30 hover:text-gold"
               >
                 <Send size={15} />
-                Telegram kanalimiz
+                Telegramda yozish
               </a>
               <a
-                href={`tel:${formPhone.replace(/\s/g, "")}`}
+                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
                 className="flex items-center justify-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-5 py-3 text-sm text-muted transition-all duration-300 hover:border-gold/30 hover:text-gold"
               >
                 <Phone size={15} />
-                {formPhone}
+                {siteConfig.phone}
               </a>
             </div>
           </motion.div>
@@ -334,7 +334,7 @@ export function FormClient() {
                       required
                       inputMode="numeric"
                       maxLength={12}
-                      placeholder="77 488 82 80"
+                      placeholder="95 800 59 99"
                       onInput={(e) => {
                         const input = e.currentTarget;
                         let val = input.value.replace(/\D/g, "").slice(0, 9);
