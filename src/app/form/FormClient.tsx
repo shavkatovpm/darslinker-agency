@@ -63,10 +63,10 @@ const questionIcons: Record<string, LucideIcon> = {
 /** Sarlavha ustidagi ikonka — oltin rangli yumshoq badge */
 function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
   return (
-    <div className="mb-[clamp(0.4rem,1.2vh,0.85rem)] inline-flex items-center justify-center rounded-xl border border-gold/25 bg-gold/[0.08] p-[clamp(0.4rem,1.1vh,0.65rem)] text-gold shadow-[0_0_24px_rgba(255,199,0,0.10)]">
+    <div className="mb-[clamp(0.35rem,1.1vh,0.85rem)] inline-flex items-center justify-center rounded-xl border border-gold/25 bg-gold/[0.08] p-[clamp(0.35rem,1vh,0.65rem)] text-gold shadow-[0_0_24px_rgba(255,199,0,0.10)]">
       <Icon
         strokeWidth={1.75}
-        className="h-[clamp(1.05rem,2.4vh,1.6rem)] w-[clamp(1.05rem,2.4vh,1.6rem)]"
+        className="h-[clamp(1rem,2.3vh,1.6rem)] w-[clamp(1rem,2.3vh,1.6rem)]"
       />
     </div>
   );
@@ -77,18 +77,47 @@ function StepIcon({ icon: Icon }: { icon: LucideIcon }) {
  * katta ekranda kattalashadi. Maqsad: scroll qilmasdan bitta ekranga sig'ishi.
  */
 const sizing = {
-  title: "text-[clamp(1.05rem,3vh,2rem)] font-bold leading-snug tracking-tight",
-  subtitle: "text-[clamp(0.75rem,1.65vh,1rem)] text-muted",
-  option: "px-[clamp(0.85rem,2.5vw,1.35rem)] py-[clamp(0.55rem,1.8vh,1.1rem)]",
-  optionText: "text-[clamp(0.8rem,1.8vh,1.1rem)]",
-  optionGap: "gap-[clamp(0.375rem,1.15vh,0.75rem)]",
-  label: "text-[clamp(0.72rem,1.5vh,0.9rem)] font-medium text-foreground",
+  title:
+    "text-[clamp(1.1rem,3.2vh,2.1rem)] font-bold leading-snug tracking-tight",
+  subtitle: "text-[clamp(0.78rem,1.7vh,1.05rem)] text-muted",
+  label: "text-[clamp(0.75rem,1.6vh,0.95rem)] font-medium text-foreground",
   // Diqqat: input matni 16px dan kichik bo'lsa iOS Safari fokusda avtomatik zoom qiladi.
   // Shuning uchun clamp minimumi aynan 1rem (16px).
-  input: "px-4 py-[clamp(0.5rem,1.55vh,0.9rem)] text-[clamp(1rem,1.8vh,1.1rem)]",
-  fieldGap: "gap-[clamp(0.45rem,1.35vh,1rem)]",
-  headGap: "mb-[clamp(0.7rem,2vh,1.5rem)]",
+  input:
+    "px-4 py-[clamp(0.55rem,1.7vh,1rem)] text-[clamp(1rem,1.95vh,1.15rem)]",
+  fieldGap: "gap-[clamp(0.4rem,1.3vh,1rem)]",
+  headGap: "mb-[clamp(0.6rem,1.8vh,1.35rem)]",
 };
+
+/**
+ * Variantlar o'lchami ularning soniga bog'liq: savolda variant kam bo'lsa —
+ * ular kattaroq bo'lib, ekranni to'ldiradi; ko'p bo'lsa — siqiladi va sig'adi.
+ * Tailwind class'lari to'liq matn ko'rinishida bo'lishi shart (skanner uchun).
+ */
+function optionSizing(count: number) {
+  if (count <= 4) {
+    return {
+      box: "px-[clamp(1rem,2.5vw,1.7rem)] py-[clamp(0.8rem,3vh,1.8rem)]",
+      text: "text-[clamp(0.95rem,3vh,1.5rem)]",
+      gap: "gap-[clamp(0.45rem,1.5vh,1rem)]",
+      check: "h-[clamp(1.25rem,3vh,1.9rem)] w-[clamp(1.25rem,3vh,1.9rem)]",
+    };
+  }
+  if (count === 5) {
+    return {
+      box: "px-[clamp(0.95rem,2.5vw,1.6rem)] py-[clamp(0.7rem,2.5vh,1.45rem)]",
+      text: "text-[clamp(0.9rem,2.5vh,1.35rem)]",
+      gap: "gap-[clamp(0.4rem,1.3vh,0.9rem)]",
+      check: "h-[clamp(1.2rem,2.7vh,1.7rem)] w-[clamp(1.2rem,2.7vh,1.7rem)]",
+    };
+  }
+  return {
+    box: "px-[clamp(0.9rem,2.5vw,1.5rem)] py-[clamp(0.6rem,2.2vh,1.25rem)]",
+    text: "text-[clamp(0.875rem,2.3vh,1.25rem)]",
+    gap: "gap-[clamp(0.35rem,1.15vh,0.8rem)]",
+    check: "h-[clamp(1.15rem,2.5vh,1.6rem)] w-[clamp(1.15rem,2.5vh,1.6rem)]",
+  };
+}
 
 export function FormClient() {
   const [step, setStep] = useState(0);
@@ -205,7 +234,6 @@ export function FormClient() {
           answers,
           name: (form.elements.namedItem("name") as HTMLInputElement).value,
           phone,
-          center: (form.elements.namedItem("center") as HTMLInputElement).value,
           telegram: (form.elements.namedItem("telegram") as HTMLInputElement)
             .value,
           source,
@@ -270,11 +298,11 @@ export function FormClient() {
 
   // ─────────────────────── Anketa ───────────────────────
   return (
-    <main className="flex min-h-[100dvh] flex-col px-4 py-[clamp(0.75rem,2.5vh,2rem)] sm:px-6">
+    <main className="flex min-h-[100dvh] flex-col px-4 py-[clamp(0.5rem,2vh,1.75rem)] sm:px-6">
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col">
         {/* Progress */}
         <div className="shrink-0">
-          <div className="mb-2 flex items-center justify-between text-[clamp(0.7rem,1.5vh,0.875rem)] text-muted">
+          <div className="mb-2 flex items-center justify-between text-[clamp(0.75rem,1.6vh,0.95rem)] text-muted">
             <button
               type="button"
               onClick={goBack}
@@ -298,8 +326,8 @@ export function FormClient() {
           </div>
         </div>
 
-        {/* Savol / kontakt — ekran markazida */}
-        <div className="flex flex-1 flex-col justify-center py-[clamp(0.75rem,2.5vh,2.5rem)]">
+        {/* Savol / kontakt — tepadan boshlanadi */}
+        <div className="flex flex-1 flex-col justify-start pt-[clamp(0.75rem,2.5vh,2rem)] pb-[clamp(0.5rem,1.5vh,1.5rem)]">
           <AnimatePresence mode="wait">
             <motion.div
               key={question ? question.id : "contact"}
@@ -309,6 +337,9 @@ export function FormClient() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               {question ? (
+                (() => {
+                  const opt = optionSizing(question.options.length);
+                  return (
                 <div>
                   <div className={sizing.headGap}>
                     <StepIcon icon={questionIcons[question.id] ?? Compass} />
@@ -322,7 +353,7 @@ export function FormClient() {
                     )}
                   </div>
 
-                  <div className={`flex flex-col ${sizing.optionGap}`}>
+                  <div className={`flex flex-col ${opt.gap}`}>
                     {question.options.map((option) => {
                       const selected = isSelected(question.id, option.value);
                       const blocked = !selected && limitReached;
@@ -336,7 +367,7 @@ export function FormClient() {
                               ? selectSingle(question.id, option.value)
                               : toggleMulti(question, option.value)
                           }
-                          className={`flex w-full items-center justify-between gap-3 rounded-xl border text-left transition-all duration-200 ${sizing.option} ${
+                          className={`flex w-full items-center justify-between gap-3 rounded-xl border text-left transition-all duration-200 ${opt.box} ${
                             selected
                               ? "border-gold/60 bg-gold/[0.08] text-foreground"
                               : "border-white/[0.08] bg-white/[0.04] text-muted"
@@ -346,11 +377,11 @@ export function FormClient() {
                               : "cursor-pointer hover:border-gold/30 hover:text-foreground"
                           }`}
                         >
-                          <span className={sizing.optionText}>
+                          <span className={opt.text}>
                             {option.label}
                           </span>
                           <span
-                            className={`flex h-[clamp(1.05rem,2.2vh,1.35rem)] w-[clamp(1.05rem,2.2vh,1.35rem)] shrink-0 items-center justify-center rounded-full border transition-colors ${
+                            className={`flex ${opt.check} shrink-0 items-center justify-center rounded-full border transition-colors ${
                               selected
                                 ? "border-gold bg-gold text-primary"
                                 : "border-white/20"
@@ -365,12 +396,14 @@ export function FormClient() {
 
                   {question.type === "multi" && (
                     <div className="mt-[clamp(0.75rem,2vh,1.5rem)]">
-                      <Button type="button" className="w-full" onClick={goNext}>
+                      <Button type="button" size="lg" className="w-full" onClick={goNext}>
                         {multiHasSelection ? "Davom etish" : "O'tkazib yuborish"}
                       </Button>
                     </div>
                   )}
                 </div>
+                  );
+                })()
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div className={sizing.headGap}>
@@ -437,28 +470,6 @@ export function FormClient() {
 
                     <div>
                       <label
-                        htmlFor="form-center"
-                        className={`mb-1 block ${sizing.label}`}
-                      >
-                        {answers.category === "edu"
-                          ? "O'quv markaz / brend nomi"
-                          : "Kompaniya / brend nomi"}
-                      </label>
-                      <input
-                        type="text"
-                        id="form-center"
-                        name="center"
-                        placeholder={
-                          answers.category === "edu"
-                            ? "Masalan: Najot Ta'lim"
-                            : "Masalan: Korzinka"
-                        }
-                        className={inputClass}
-                      />
-                    </div>
-
-                    <div>
-                      <label
                         htmlFor="form-telegram"
                         className={`mb-1 block ${sizing.label}`}
                       >
@@ -493,7 +504,7 @@ export function FormClient() {
                   )}
 
                   <div className="mt-[clamp(0.75rem,2vh,1.5rem)]">
-                    <Button type="submit" className="w-full" disabled={loading}>
+                    <Button type="submit" size="lg" className="w-full" disabled={loading}>
                       {loading ? "Yuborilmoqda..." : "Arizani yuborish"}
                     </Button>
                   </div>
