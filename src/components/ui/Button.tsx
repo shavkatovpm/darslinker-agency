@@ -11,6 +11,7 @@ type ButtonProps = {
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
 };
 
 export function Button({
@@ -21,9 +22,10 @@ export function Button({
   className = "",
   onClick,
   type = "button",
+  disabled = false,
 }: ButtonProps) {
   const baseStyles =
-    "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 cursor-pointer";
+    "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 cursor-pointer disabled:cursor-not-allowed disabled:opacity-60";
 
   const variants = {
     primary:
@@ -55,11 +57,12 @@ export function Button({
 
   return (
     <motion.button
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={disabled ? undefined : { scale: 1.02 }}
+      whileTap={disabled ? undefined : { scale: 0.98 }}
       className={combinedClass}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </motion.button>

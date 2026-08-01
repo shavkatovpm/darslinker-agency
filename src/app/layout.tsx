@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, Manrope } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { PageWrapper } from "@/components/layout/PageWrapper";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -101,11 +98,7 @@ export default function RootLayout({
             }),
           }}
         />
-        <PageWrapper>
-          <Navbar />
-          <main className="min-h-screen flex-1">{children}</main>
-          <Footer />
-        </PageWrapper>
+        {children}
       </body>
     </html>
   );

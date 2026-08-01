@@ -23,7 +23,6 @@ export type FormQuestion = {
   title: string;
   subtitle?: string;
   type: "single" | "multi";
-  emoji: string;
   options: FormOption[];
   /** Faqat multi uchun: maksimal nechta variant tanlash mumkin */
   maxSelect?: number;
@@ -59,7 +58,6 @@ export const formQuestions: FormQuestion[] = [
   // ─────────── 1. Kategoriya — butun anketani belgilaydi ───────────
   {
     id: "category",
-    emoji: "🎯",
     title: "Biznesingiz qaysi sohada?",
     subtitle: "Keyingi savollar tanlovingizga moslashadi",
     type: "single",
@@ -82,7 +80,6 @@ export const formQuestions: FormQuestion[] = [
   // ─────────────────────── TA'LIM tarmog'i ───────────────────────
   {
     id: "edu_type",
-    emoji: "🎓",
     title: "Ta'lim yo'nalishingiz aniqroq qaysi biri?",
     type: "single",
     showIf: (a) => is(a, "category", "edu"),
@@ -95,7 +92,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "edu_scale_tutor",
-    emoji: "👥",
     title: "Hozir nechta o'quvchingiz bor?",
     subtitle: "Taxminiy son yetarli",
     type: "single",
@@ -109,7 +105,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "edu_scale_center",
-    emoji: "👥",
     title: "Hozir nechta o'quvchingiz bor?",
     subtitle: "Taxminiy son yetarli",
     type: "single",
@@ -123,7 +118,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "edu_pain",
-    emoji: "🔍",
     title: "Hozirgi eng katta muammoingiz nima?",
     subtitle: "3 tagacha tanlashingiz mumkin",
     type: "multi",
@@ -139,7 +133,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "edu_services",
-    emoji: "🛠",
     title: "Sizga qaysi yechim kerak?",
     subtitle: "Bir nechtasini tanlashingiz mumkin",
     type: "multi",
@@ -161,7 +154,6 @@ export const formQuestions: FormQuestion[] = [
   // ─────────────────────── SAVDO tarmog'i ───────────────────────
   {
     id: "retail_channel",
-    emoji: "🛍",
     title: "Hozir asosan qayerda sotasiz?",
     type: "single",
     showIf: (a) => is(a, "category", "retail"),
@@ -175,7 +167,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "retail_scale",
-    emoji: "📦",
     title: "Oyiga taxminan nechta buyurtma?",
     type: "single",
     showIf: (a) => is(a, "category", "retail"),
@@ -188,7 +179,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "retail_pain",
-    emoji: "🔍",
     title: "Hozirgi eng katta muammoingiz nima?",
     subtitle: "3 tagacha tanlashingiz mumkin",
     type: "multi",
@@ -204,7 +194,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "retail_services",
-    emoji: "🛠",
     title: "Sizga qaysi yechim kerak?",
     subtitle: "Bir nechtasini tanlashingiz mumkin",
     type: "multi",
@@ -223,7 +212,6 @@ export const formQuestions: FormQuestion[] = [
   // ────────────────────── XIZMAT tarmog'i ──────────────────────
   {
     id: "service_type",
-    emoji: "💼",
     title: "Qaysi sohada xizmat ko'rsatasiz?",
     type: "single",
     showIf: (a) => is(a, "category", "service"),
@@ -237,7 +225,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "service_scale",
-    emoji: "📅",
     title: "Oyiga taxminan nechta mijoz qabul qilasiz?",
     type: "single",
     showIf: (a) => is(a, "category", "service"),
@@ -250,7 +237,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "service_pain",
-    emoji: "🔍",
     title: "Hozirgi eng katta muammoingiz nima?",
     subtitle: "3 tagacha tanlashingiz mumkin",
     type: "multi",
@@ -266,7 +252,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "service_services",
-    emoji: "🛠",
     title: "Sizga qaysi yechim kerak?",
     subtitle: "Bir nechtasini tanlashingiz mumkin",
     type: "multi",
@@ -285,7 +270,6 @@ export const formQuestions: FormQuestion[] = [
   // ─────────────────────── BOSHQA tarmog'i ───────────────────────
   {
     id: "other_type",
-    emoji: "🚀",
     title: "Faoliyatingiz qaysi biriga yaqin?",
     type: "single",
     showIf: (a) => is(a, "category", "other"),
@@ -299,7 +283,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "other_scale",
-    emoji: "👥",
     title: "Jamoangiz hajmi qanday?",
     type: "single",
     showIf: (a) => is(a, "category", "other"),
@@ -312,7 +295,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "other_pain",
-    emoji: "🔍",
     title: "Hozirgi eng katta muammoingiz nima?",
     subtitle: "3 tagacha tanlashingiz mumkin",
     type: "multi",
@@ -328,7 +310,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "other_services",
-    emoji: "🛠",
     title: "Sizga qaysi yechim kerak?",
     subtitle: "Bir nechtasini tanlashingiz mumkin",
     type: "multi",
@@ -347,7 +328,6 @@ export const formQuestions: FormQuestion[] = [
   // ─────────── Umumiy yakuniy savollar (hamma tarmoq uchun) ───────────
   {
     id: "presence",
-    emoji: "🌐",
     title: "Hozir websitengiz bormi?",
     type: "single",
     showIf: wantsWebPresence,
@@ -360,7 +340,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "budget",
-    emoji: "💰",
     title: "Loyihaga taxminiy byudjetingiz?",
     subtitle: "Aniq raqam shart emas — taxminiy oraliq",
     type: "single",
@@ -374,7 +353,6 @@ export const formQuestions: FormQuestion[] = [
   },
   {
     id: "timeline",
-    emoji: "⏱",
     title: "Qachon boshlamoqchisiz?",
     type: "single",
     options: [
@@ -393,6 +371,7 @@ export function getVisibleQuestions(answers: Answers): FormQuestion[] {
 
 export type LeadTemperature = {
   label: string;
+  /** Telegram xabaridagi harorat belgisi: 🔥 / 🌤 / ❄️ */
   emoji: string;
   score: number;
   maxScore: number;
