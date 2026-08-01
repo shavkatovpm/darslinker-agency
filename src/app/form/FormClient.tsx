@@ -90,6 +90,26 @@ const sizing = {
 };
 
 /**
+ * Variant matni: tiregacha bo'lgan asosiy so'z to'liq o'lchamda, undan keyingi
+ * izoh esa yarmi (0.5em). Juda kichik ekranda o'qilmay qolmasligi uchun
+ * pastki chegara qo'yilgan — max(0.68rem, 0.5em).
+ */
+function OptionLabel({ label }: { label: string }) {
+  const at = label.indexOf(" — ");
+  if (at === -1) return <>{label}</>;
+
+  return (
+    <>
+      {label.slice(0, at)}
+      <span className="text-[max(0.68rem,0.5em)] text-muted/75">
+        {" "}
+        {label.slice(at + 3)}
+      </span>
+    </>
+  );
+}
+
+/**
  * Variantlar o'lchami ularning soniga bog'liq: savolda variant kam bo'lsa —
  * ular kattaroq bo'lib, ekranni to'ldiradi; ko'p bo'lsa — siqiladi va sig'adi.
  * Tailwind class'lari to'liq matn ko'rinishida bo'lishi shart (skanner uchun).
@@ -378,7 +398,7 @@ export function FormClient() {
                           }`}
                         >
                           <span className={opt.text}>
-                            {option.label}
+                            <OptionLabel label={option.label} />
                           </span>
                           <span
                             className={`flex ${opt.check} shrink-0 items-center justify-center rounded-full border transition-colors ${
