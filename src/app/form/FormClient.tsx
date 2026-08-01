@@ -83,8 +83,9 @@ const sizing = {
   optionText: "text-[clamp(0.8rem,1.8vh,1.1rem)]",
   optionGap: "gap-[clamp(0.375rem,1.15vh,0.75rem)]",
   label: "text-[clamp(0.72rem,1.5vh,0.9rem)] font-medium text-foreground",
-  input:
-    "px-4 py-[clamp(0.5rem,1.55vh,0.9rem)] text-[clamp(0.85rem,1.75vh,1rem)]",
+  // Diqqat: input matni 16px dan kichik bo'lsa iOS Safari fokusda avtomatik zoom qiladi.
+  // Shuning uchun clamp minimumi aynan 1rem (16px).
+  input: "px-4 py-[clamp(0.5rem,1.55vh,0.9rem)] text-[clamp(1rem,1.8vh,1.1rem)]",
   fieldGap: "gap-[clamp(0.45rem,1.35vh,1rem)]",
   headGap: "mb-[clamp(0.7rem,2vh,1.5rem)]",
 };
@@ -409,7 +410,7 @@ export function FormClient() {
                         Telefon raqamingiz *
                       </label>
                       <div className="flex rounded-xl border border-white/[0.08] transition-colors focus-within:border-gold/50 focus-within:ring-1 focus-within:ring-gold/20">
-                        <span className="flex items-center rounded-l-xl border-r border-white/[0.08] bg-white/[0.06] px-3 text-[clamp(0.8rem,1.6vh,0.9rem)] text-muted">
+                        <span className="flex items-center rounded-l-xl border-r border-white/[0.08] bg-white/[0.06] px-3 text-[clamp(0.9rem,1.7vh,1rem)] text-muted">
                           +998
                         </span>
                         <input
