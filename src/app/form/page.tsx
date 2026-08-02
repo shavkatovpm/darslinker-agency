@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { FormClient } from "./FormClient";
+import { tgPixelSnippet } from "@/lib/tgPixel";
 
 export const metadata: Metadata = {
   title: "Bepul konsultatsiya uchun ariza",
@@ -15,5 +17,14 @@ export const metadata: Metadata = {
 };
 
 export default function FormPage() {
-  return <FormClient />;
+  return (
+    <>
+      <FormClient />
+      <Script
+        id="telegram-ads-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{ __html: tgPixelSnippet }}
+      />
+    </>
+  );
 }

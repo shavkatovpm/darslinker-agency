@@ -31,6 +31,7 @@ import {
   type FormQuestion,
 } from "@/lib/formQuestions";
 import { siteConfig } from "@/lib/constants";
+import { trackLead } from "@/lib/tgPixel";
 
 /** Forma to'ldirgan mijozlar bevosita support bilan yozishadi (kanal emas) */
 const supportTelegram = "https://t.me/darslinker_support";
@@ -261,6 +262,7 @@ export function FormClient() {
       });
 
       if (!res.ok) throw new Error();
+      trackLead(); // Telegram Ads konversiyasi — faqat ariza haqiqatan yuborilganda
       setSubmitted(true);
     } catch {
       setError("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
