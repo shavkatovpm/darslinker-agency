@@ -339,19 +339,6 @@ export const formQuestions: FormQuestion[] = [
     ],
   },
   {
-    id: "budget",
-    title: "Loyihaga taxminiy byudjetingiz?",
-    subtitle: "Aniq raqam shart emas — taxminiy oraliq",
-    type: "single",
-    options: [
-      { value: "<250", label: "$250 gacha", score: 0 },
-      { value: "250-650", label: "$250 – $650", score: 2 },
-      { value: "650-1500", label: "$650 – $1500", score: 3 },
-      { value: "1500+", label: "$1500 dan yuqori", score: 3 },
-      { value: "unknown", label: "Hali aniq emas", score: 1 },
-    ],
-  },
-  {
     id: "timeline",
     title: "Qachon boshlamoqchisiz?",
     type: "single",
@@ -363,6 +350,15 @@ export const formQuestions: FormQuestion[] = [
     ],
   },
 ];
+
+/**
+ * Anketaning to'liq uzunligi: kategoriya + yo'nalish + miqyos + muammolar +
+ * yechim + sayt holati + muddat = 7 savol, ustiga kontakt qadami.
+ *
+ * Progress ko'rsatkichi shu songa tayanadi. Aks holda boshida faqat shartsiz
+ * savollar ko'rinib, "1 / 3" chiqadi va javob berilgani sari son sakrab ketadi.
+ */
+export const PLANNED_STEPS = 8;
 
 /** Joriy javoblarga mos keladigan savollar ro'yxati */
 export function getVisibleQuestions(answers: Answers): FormQuestion[] {
@@ -441,7 +437,6 @@ const SHORT_TITLES: Record<string, string> = {
   other_pain: "Muammolar",
   other_services: "Kerakli yechim",
   presence: "Sayt holati",
-  budget: "Byudjet",
   timeline: "Muddat",
 };
 

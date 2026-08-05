@@ -20,13 +20,13 @@ import {
   Send,
   Store,
   Users,
-  Wallet,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import {
   getVisibleQuestions,
+  PLANNED_STEPS,
   type Answers,
   type FormQuestion,
 } from "@/lib/formQuestions";
@@ -57,7 +57,6 @@ const questionIcons: Record<string, LucideIcon> = {
   other_pain: AlertCircle,
   other_services: Wrench,
   presence: Globe,
-  budget: Wallet,
   timeline: Clock,
 };
 
@@ -170,7 +169,9 @@ export function FormClient() {
 
   // Ko'rinadigan savollar javoblarga qarab o'zgaradi (branching)
   const questions = useMemo(() => getVisibleQuestions(answers), [answers]);
-  const totalSteps = questions.length + 1; // savollar + kontakt qadami
+  // Ko'rinadigan savollar javob berilgani sari ko'payadi, shuning uchun
+  // hisoblagich to'liq yo'l uzunligiga tayanadi — son orqaga sakramaydi
+  const totalSteps = Math.max(questions.length + 1, PLANNED_STEPS);
 
   // Oldingi javob o'zgarganda ro'yxat qisqarishi mumkin — qadamni chegarada ushlaymiz
   const currentStep = Math.min(step, questions.length);
