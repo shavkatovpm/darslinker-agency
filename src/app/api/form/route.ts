@@ -1,12 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
+  formQuestions,
   getSelectedServices,
-  getVisibleQuestions,
-  scoreAnswers,
-  shortLabelFor,
-  shortTitle,
+  scoreOf,
+  shortLabelOf,
+  shortTitleOf,
+  visibleOf,
   type Answers,
 } from "@/lib/formQuestions";
+import { getAdQuestions } from "@/lib/adQuestions";
+import { getAdTheme } from "@/lib/adThemes";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID!;
@@ -19,12 +22,21 @@ type Payload = {
   center?: string;
   telegram?: string;
   source?: string;
+  /** Reklama kreativi: "1".."5". Bo'lmasa — umumiy /form anketasi */
+  creative?: string;
 };
 
 export async function POST(req: NextRequest) {
   try {
-    const { answers = {}, name, phone, center, telegram, source }: Payload =
-      await req.json();
+    const {
+      answers = {},
+      name,
+      phone,
+      center,
+      telegram,
+      source,
+      creative,
+    }: Payload = await req.json();
 
     const digits = (phone || "").replace(/\D/g, "");
 
@@ -35,29 +47,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const lead = scoreAnswers(answers);
+    // Kreativ landingidan kelgan bo'lsa — o'sha kreativning anketasi
+    const adQuestions = creative ? getAdQuestions(creative) : undefined;
+    const theme = creative ? getAdTheme(creative) : undefined;
+    const questions = adQuestions ?? formQuestions;
+
+    const lead = scoreOf(questions, answers);
     const percent =
       lead.maxScore > 0 ? Math.round((lead.score / lead.maxScore) * 100) : 0;
 
     // Faqat shu mijozga ko'rsatilgan savollar xabarga tushadi
-    const answerLines = getVisibleQuestions(answers).map((q) => {
+    const answerLines = visibleOf(questions, answers).map((q) => {
       const answer = answers[q.id];
-      const label = `<b>${escapeHtml(shortTitle(q.id))}:</b>`;
+      const label = `<b>${escapeHtml(shortTitleOf(q))}:</b>`;
 
       if (Array.isArray(answer)) {
         if (answer.length === 0) return `${label} —`;
         if (answer.length === 1) {
-          return `${label} ${escapeHtml(shortLabelFor(q.id, answer[0]))}`;
+          return `${label} ${escapeHtml(shortLabelOf(questions, q.id, answer[0]))}`;
         }
-        // Bir nechta javob — har biri alohida qatorda
         const items = answer
-          .map((v) => `     • ${escapeHtml(shortLabelFor(q.id, v))}`)
+          .map((v) => `     • ${escapeHtml(shortLabelOf(questions, q.id, v))}`)
           .join("\n");
         return `${label}\n${items}`;
       }
 
       return `${label} ${
-        answer ? escapeHtml(shortLabelFor(q.id, answer)) : "—"
+        answer ? escapeHtml(shortLabelOf(questions, q.id, answer)) : "—"
       }`;
     });
 
@@ -65,12 +81,11 @@ export async function POST(req: NextRequest) {
 
     const text = [
       `${lead.emoji} <b>${lead.label}</b>  ·  ${percent}% (${lead.score}/${lead.maxScore})`,
+      theme ? `🎯 <b>${escapeHtml(theme.label)}</b>` : null,
       ``,
       `👤 <b>${escapeHtml(name.trim())}</b>`,
       `📞 <code>+998 ${formatPhone(digits)}</code>`,
-      telegram?.trim()
-        ? `✈️ ${escapeHtml(normalizeUsername(telegram))}`
-        : null,
+      telegram?.trim() ? `✈️ ${escapeHtml(normalizeUsername(telegram))}` : null,
       center?.trim() ? `🏢 ${escapeHtml(center.trim())}` : null,
       ``,
       divider,
@@ -104,13 +119,12 @@ export async function POST(req: NextRequest) {
 
     // Google Sheets — ixtiyoriy, xatosi arizani buzmasligi kerak
     if (SHEETS_URL) {
-      const serviceQuestion = getVisibleQuestions(answers).find((q) =>
+      const serviceQuestion = visibleOf(questions, answers).find((q) =>
         q.id.endsWith("_services")
       );
       const services = getSelectedServices(answers)
         .map(
-          (v) =>
-            serviceQuestion?.options.find((o) => o.value === v)?.label ?? v
+          (v) => serviceQuestion?.options.find((o) => o.value === v)?.label ?? v
         )
         .join(", ");
 
@@ -122,7 +136,7 @@ export async function POST(req: NextRequest) {
           phone: `998${digits}`,
           center: center?.trim() || "",
           service: services,
-          message: `${lead.label} ${percent}% — ${answerLines
+          message: `${theme ? theme.label + " — " : ""}${lead.label} ${percent}% — ${answerLines
             .join(" | ")
             .replace(/<\/?b>/g, "")
             .replace(/\n\s+•\s*/g, " ")}`,

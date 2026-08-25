@@ -21,6 +21,8 @@ export type FormOption = {
 export type FormQuestion = {
   id: string;
   title: string;
+  /** Telegram xabari va jadval uchun qisqa yorliq (uzun sarlavha o'rniga) */
+  short?: string;
   subtitle?: string;
   type: "single" | "multi";
   options: FormOption[];
@@ -450,4 +452,64 @@ export function shortTitle(questionId: string): string {
  */
 export function shortLabelFor(questionId: string, value: string): string {
   return labelFor(questionId, value).split(" — ")[0].trim();
+}
+
+/* ─────────── Ixtiyoriy savollar ro'yxati bilan ishlaydigan funksiyalar ───────────
+   Reklama kreativlarining o'z anketalari bor (src/lib/adQuestions.ts), shuning uchun
+   mantiq global ro'yxatga bog'lanmagan holda ham ishlashi kerak. */
+
+/** Berilgan ro'yxatdan javoblarga mos savollarni ajratadi */
+export function visibleOf(
+  questions: FormQuestion[],
+  answers: Answers
+): FormQuestion[] {
+  return questions.filter((q) => !q.showIf || q.showIf(answers));
+}
+
+/** Berilgan ro'yxat bo'yicha lead haroratini hisoblaydi */
+export function scoreOf(
+  questions: FormQuestion[],
+  answers: Answers
+): LeadTemperature {
+  const visible = visibleOf(questions, answers);
+
+  let score = 0;
+  let maxScore = 0;
+
+  for (const q of visible) {
+    maxScore += Math.max(...q.options.map((o) => o.score));
+
+    const answer = answers[q.id];
+    if (!answer) continue;
+
+    if (Array.isArray(answer)) {
+      const scores = answer
+        .map((v) => q.options.find((o) => o.value === v)?.score ?? 0)
+        .sort((a, b) => b - a);
+      score += scores[0] ?? 0;
+    } else {
+      score += q.options.find((o) => o.value === answer)?.score ?? 0;
+    }
+  }
+
+  const ratio = maxScore > 0 ? score / maxScore : 0;
+  if (ratio >= 0.7) return { label: "ISSIQ LEAD", emoji: "🔥", score, maxScore };
+  if (ratio >= 0.45) return { label: "ILIQ LEAD", emoji: "🌤", score, maxScore };
+  return { label: "SOVUQ LEAD", emoji: "❄️", score, maxScore };
+}
+
+/** Javob qiymatini matnga aylantiradi, tiredan keyingi izohni tashlab */
+export function shortLabelOf(
+  questions: FormQuestion[],
+  questionId: string,
+  value: string
+): string {
+  const q = questions.find((item) => item.id === questionId);
+  const label = q?.options.find((o) => o.value === value)?.label ?? value;
+  return label.split(" — ")[0].trim();
+}
+
+/** Savolning qisqa yorlig'i: o'z maydoni → global jadval → sarlavha */
+export function shortTitleOf(question: FormQuestion): string {
+  return question.short ?? SHORT_TITLES[question.id] ?? question.title;
 }
