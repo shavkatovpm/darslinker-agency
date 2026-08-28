@@ -10,6 +10,7 @@ import {
 } from "@/lib/formQuestions";
 import { getAdQuestions } from "@/lib/adQuestions";
 import { getAdTheme } from "@/lib/adThemes";
+import { checkPhone } from "@/lib/phoneCheck";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN!;
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID!;
@@ -79,8 +80,18 @@ export async function POST(req: NextRequest) {
 
     const divider = "━━━━━━━━━━━━━━━";
 
+    // Soxta raqam serverda qayta tekshiriladi — brauzerdagi natijaga ishonilmaydi
+    const phoneVerdict = checkPhone(digits);
+
+    const headline =
+      phoneVerdict.level === "fake"
+        ? `🚩 <b>FAKE RAQAM</b> — ${escapeHtml(phoneVerdict.reason ?? "")}`
+        : phoneVerdict.level === "suspicious"
+          ? `⚠️ <b>SHUBHALI RAQAM</b> — ${escapeHtml(phoneVerdict.reason ?? "")}\n${lead.emoji} <b>${lead.label}</b>  ·  ${percent}% (${lead.score}/${lead.maxScore})`
+          : `${lead.emoji} <b>${lead.label}</b>  ·  ${percent}% (${lead.score}/${lead.maxScore})`;
+
     const text = [
-      `${lead.emoji} <b>${lead.label}</b>  ·  ${percent}% (${lead.score}/${lead.maxScore})`,
+      headline,
       theme ? `🎯 <b>${escapeHtml(theme.label)}</b>` : null,
       ``,
       `👤 <b>${escapeHtml(name.trim())}</b>`,

@@ -11,6 +11,7 @@ import {
 import { getAdQuestions, plannedSteps } from "@/lib/adQuestions";
 import { themeVars, type AdTheme } from "@/lib/adThemes";
 import { trackLead } from "@/lib/tgPixel";
+import { checkPhone } from "@/lib/phoneCheck";
 import { CreativeArt } from "./CreativeArt";
 
 const supportTelegram = "https://t.me/darslinker_support";
@@ -58,6 +59,11 @@ export function AdFormClient({ theme }: { theme: AdTheme }) {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [source, setSource] = useState(theme.source);
+  /** Raqam shubhali chiqqanda — tasdiqlash oynasi uchun saqlangan ariza */
+  const [pending, setPending] = useState<{
+    payload: Record<string, unknown>;
+    phone: string;
+  } | null>(null);
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Reklama manbasi: kreativ kodi + kampaniya parametrlari
@@ -135,6 +141,26 @@ export function AdFormClient({ theme }: { theme: AdTheme }) {
     question.maxSelect !== undefined &&
     selectedCount >= question.maxSelect;
 
+  /** Arizani serverga yuborish — tekshiruvdan o'tgandan keyin chaqiriladi */
+  async function send(payload: Record<string, unknown>) {
+    setPending(null);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/form", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error();
+      trackLead();
+      setSubmitted(true);
+    } catch {
+      setError("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (loading) return;
@@ -156,34 +182,30 @@ export function AdFormClient({ theme }: { theme: AdTheme }) {
       return;
     }
 
-    setLoading(true);
-    try {
-      const res = await fetch("/api/form", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          creative: theme.slug,
-          answers,
-          name: (form.elements.namedItem("name") as HTMLInputElement).value,
-          phone,
-          telegram: (form.elements.namedItem("telegram") as HTMLInputElement).value,
-          source,
-        }),
-      });
-      if (!res.ok) throw new Error();
-      trackLead();
-      setSubmitted(true);
-    } catch {
-      setError("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
-    } finally {
-      setLoading(false);
+    const payload = {
+      creative: theme.slug,
+      answers,
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      phone,
+      telegram: (form.elements.namedItem("telegram") as HTMLInputElement).value,
+      source,
+    };
+
+    // Raqam soxtaga o'xshasa — avval o'ylab ko'rishni taklif qilamiz.
+    // Bloklamaymiz: mijoz baribir yuborsa, ariza ketaveradi.
+    if (checkPhone(phone).level !== "ok") {
+      setPending({ payload, phone });
+      return;
     }
+
+    await send(payload);
   }
 
   const shell =
     "relative flex min-h-[100dvh] flex-col overflow-hidden bg-[var(--ad-bg)] text-[var(--ad-text)]";
   const glow =
     "pointer-events-none absolute -top-[20vh] right-[-15vw] h-[70vh] w-[70vh] rounded-full blur-3xl";
+
   const inputClass =
     "w-full rounded-xl border border-[var(--ad-border)] bg-[var(--ad-surface)] px-4 py-[clamp(0.6rem,1.7vh,1rem)] text-[clamp(1rem,1.95vh,1.15rem)] text-[var(--ad-text)] outline-none transition-colors placeholder:opacity-40 focus:border-[var(--ad-accent)]";
   const accentButton =
@@ -461,6 +483,73 @@ export function AdFormClient({ theme }: { theme: AdTheme }) {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Soxta raqam — vijdonga murojaat. Bloklamaydi, tanlov mijozda qoladi. */}
+      <AnimatePresence>
+        {pending && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-end justify-center bg-black/55 p-4 backdrop-blur-sm sm:items-center"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.98 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full max-w-md rounded-2xl border border-[var(--ad-border)] bg-[var(--ad-surface)] p-6 text-[var(--ad-text)] shadow-2xl sm:p-8"
+            >
+              <h2 className="text-[clamp(1.15rem,3vh,1.6rem)] font-bold leading-snug">
+                Raqamingiz to&apos;g&apos;rimi?
+              </h2>
+
+              <p className="mt-3 text-[clamp(0.95rem,2vh,1.15rem)] leading-relaxed text-[var(--ad-muted)]">
+                Siz{" "}
+                <span className="font-semibold text-[var(--ad-text)]">
+                  +998 {pending.phone.slice(0, 2)} {pending.phone.slice(2, 5)}{" "}
+                  {pending.phone.slice(5, 7)} {pending.phone.slice(7)}
+                </span>{" "}
+                deb yozdingiz.
+              </p>
+
+              <p className="mt-4 text-[clamp(0.95rem,2vh,1.15rem)] leading-relaxed text-[var(--ad-muted)]">
+                Har bir ariza ortida jonli odam turadi. Shu raqamga
+                qo&apos;ng&apos;iroq qilamiz — javob bermasa, o&apos;sha vaqt
+                boshqa mijozdan o&apos;g&apos;irlangan bo&apos;ladi. 10 soniya
+                ajrating va haqiqiy raqamingizni yozing.
+              </p>
+
+              <div className="mt-7 flex flex-col gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPending(null);
+                    requestAnimationFrame(() => {
+                      const input = document.getElementById("ad-phone");
+                      if (input instanceof HTMLInputElement) {
+                        input.focus();
+                        input.select();
+                      }
+                    });
+                  }}
+                  className={accentButton}
+                >
+                  Raqamni tuzataman
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => send(pending.payload)}
+                  className="w-full rounded-xl px-6 py-3 text-[clamp(0.9rem,1.9vh,1.05rem)] text-[var(--ad-muted)] underline underline-offset-4 transition-colors hover:text-[var(--ad-text)]"
+                >
+                  Baribir yuborish
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
